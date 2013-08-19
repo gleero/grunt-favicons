@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Rcam — система видеонаблюдения</title>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        <link rel="shortcut icon" href="/favicon.ico">
+
+        <!-- build:css /media/camlist.css -->
+        <link rel="stylesheet" href="/bundles/core/styles/_reset.css" />
+        <link rel="stylesheet" href="/bundles/core/styles/debug.css" />
+        <link rel="stylesheet" href="/bundles/auth/styles/auth.css" />
+        <link rel="stylesheet" href="/bundles/fotorama/styles/fotorama.css" />
+        <link rel="stylesheet" href="/bundles/rcam/styles/rcam.css" />
+        <!-- endbuild -->
+
+        <link href="http://fonts.googleapis.com/css?family=Cuprum:400,700&subset=latin,cyrillic" rel="stylesheet" type="text/css">
+
+        <!-- build:js /media/jquery.js -->
+            <script src="/bundles/jquery/scripts/jquery-1.8.2.min.js"></script>
+        <!-- endbuild -->
+        <!-- build:js /media/fotorama.js -->
+        <script src="/bundles/fotorama/scripts/fotorama.js"></script>
+        <!-- endbuild -->
+
+    </head>
+    <body>
+        <div id="whapshadow"></div>
+        <div id="clickme"></div>
+        <div id="loginpage">
+            <div class="mayhidden">
+                <div class="imger"><img src="img/logo.png" /></div>
+            </div>
+            <div class="logineax">
+                <div>
+                    <div class="loginbox">
+                        <input type="text" placeholder="Логин" id="loginbox" />
+                    </div>
+                    <div class="loginbox">
+                        <span class="login-krutilka"></span>
+                        <img src="/img/button-right.png" alt="Войти" id="loginbtn" />
+                        <input type="password" placeholder="Пароль" style="width: 85%" id="passwordbox" />
+                    </div>
+                </div>
+            </div>
+            <div id="footer">
+                Разработано в «<a href="http://rstudio.by/">rstudio.by</a>». © 2013
+            </div>
+        </div>
+        <div class="bottommenu">
+            <div class="gridselect">
+                <div class="i3x2h icon" data-icon="3x2" data-style="0" style="float: none; margin-top: 7px;"></div>
+                <div class="i2x2h icon" data-icon="2x2" data-style="1" style="float: none; margin-top: 7px;"></div>
+                <div class="i2x1h icon" data-icon="2x1" data-style="2" style="float: none; margin-top: 5px;"></div>
+                <div class="i1x1h icon" data-icon="1x1" data-style="3" style="float: none; margin-top: 4px;"></div>
+            </div>
+            <a href="#logout" class="logout-button">Выйти</a>
+            <!-- <div class="gear icon"></div> -->
+            <div class="eye icon"></div>
+            <div class="icon gridicon"></div>
+            <span>Пользователь</span>
+        </div>
+        <div class="rcam-fotorama">
+        </div>
+    </div>
+    <!-- build:js /media/global.js -->
+    <script src="/bundles/usersettings/scripts/usersettings.rcam.js"></script>
+    <script src="/bundles/cookies/scripts/cookies.js"></script>
+    <script src="/bundles/spinner/scripts/spinner.js"></script>
+    <script src="/bundles/api/scripts/api.rcam.js"></script>
+    <script src="/bundles/lis/scripts/jquery.lis.js"></script>
+    <!-- endbuild -->
+    <!-- build:js /media/camlist.js -->
+    <script src="/bundles/sha1/scripts/sha1.js"></script>
+    <script src="/bundles/auth/scripts/auth.js"></script>
+    <script src="/bundles/grid/scripts/grid.js"></script>
+    <script src="/bundles/core/scripts/page-auth.js"></script>
+    <!-- endbuild -->
+    <script src="/bundles/inlines/scripts/metrika.js"></script>
+</body>
+</html>

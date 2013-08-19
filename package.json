@@ -28,6 +28,10 @@
   "scripts": {
     "test": "grunt test"
   },
+  "dependencies": {
+    "execSync": "~1.0.1-pre",
+    "cheerio": "~0.12.1"
+  },
   "devDependencies": {
     "grunt-contrib-jshint": "~0.6.0",
     "grunt-contrib-clean": "~0.4.0",
