@@ -1,6 +1,9 @@
 # grunt-favicons
 
-> Generate favicon.ico and icons for iOS, Android and WP8
+Generates all known types and sizes icons from PNG image. Uses ImageMagick.
+
+
+
 
 ## Getting Started
 This plugin requires Grunt `~0.4.1`

@@ -25,7 +25,7 @@ module.exports = function(grunt) {
                     html: 'test/index.html',
                     appleTouchBackgroundColor: "#f9ba21",
                     trueColor: false,
-                    HTMLPrefix: "",
+                    HTMLPrefix: "/media/images/",
                     windowsTile: true,
                     tileBlackWhite: true,
                     tileColor: "auto" // none, auto, #color
