@@ -9,6 +9,7 @@
 'use strict';
 
 var path = require('path');
+var fs = require('fs');
 var execSync = require("execSync");
 
 module.exports = function(grunt) {
@@ -55,6 +56,7 @@ module.exports = function(grunt) {
         // Default options
         var options = this.options({
             trueColor: false,
+            precomposed: true,
             HTMLPrefix: "",
             appleTouchBackgroundColor: "auto", // none, auto, #color
             windowsTile: true,
@@ -119,45 +121,50 @@ module.exports = function(grunt) {
             var additionalOpts = options.appleTouchBackgroundColor !== "none" ?
                 [ "-background", '"' + options.appleTouchBackgroundColor + '"', "-flatten"] : [];
 
+            var prefix = options.precomposed ? "-precomposed" : "";
+
             // 57x57: iPhone non-retina, Android 2.1+
             grunt.log.write('apple-touch-icon.png... ');
             convert(combine(f, "57x57", "apple-touch-icon.png", additionalOpts));
             grunt.log.ok();
 
-            grunt.log.write('apple-touch-icon-precomposed.png... ');
-            convert(combine(f, "57x57", "apple-touch-icon-precomposed.png", additionalOpts));
-            grunt.log.ok();
+            if (!options.precomposed) {
+                grunt.log.write('apple-touch-icon" + prefix + ".png... ');
+                convert(combine(f, "57x57", "apple-touch-icon" + prefix + ".png", additionalOpts));
+                grunt.log.ok();
+            }
 
             // 72x72: iPad non-retina
-            grunt.log.write('apple-touch-icon-72x72-precomposed.png... ');
-            convert(combine(f, "72x72", "apple-touch-icon-72x72-precomposed.png", additionalOpts));
+            grunt.log.write('apple-touch-icon-72x72" + prefix + ".png... ');
+            convert(combine(f, "72x72", "apple-touch-icon-72x72" + prefix + ".png", additionalOpts));
             grunt.log.ok();
 
             // 114x114: iPhone retina, iOS 6 and lower
-            grunt.log.write('apple-touch-icon-114x114-precomposed.png... ');
-            convert(combine(f, "114x114", "apple-touch-icon-114x114-precomposed.png", additionalOpts));
+            grunt.log.write('apple-touch-icon-114x114" + prefix + ".png... ');
+            convert(combine(f, "114x114", "apple-touch-icon-114x114" + prefix + ".png", additionalOpts));
             grunt.log.ok();
 
             // 120x120: iPhone retina, iOS 7 and higher
-            grunt.log.write('apple-touch-icon-120x120-precomposed.png... ');
-            convert(combine(f, "120x120", "apple-touch-icon-120x120-precomposed.png", additionalOpts));
+            grunt.log.write('apple-touch-icon-120x120" + prefix + ".png... ');
+            convert(combine(f, "120x120", "apple-touch-icon-120x120" + prefix + ".png", additionalOpts));
             grunt.log.ok();
 
             // 144x144: iPad retina
-            grunt.log.write('apple-touch-icon-144x144-precomposed.png... ');
-            convert(combine(f, "144x144", "apple-touch-icon-144x144-precomposed.png", additionalOpts));
+            grunt.log.write('apple-touch-icon-144x144" + prefix + ".png... ');
+            convert(combine(f, "144x144", "apple-touch-icon-144x144" + prefix + ".png", additionalOpts));
             grunt.log.ok();
 
             // Append icons to <HEAD>
             if (needHTML) {
                 grunt.log.write('Updating HTML... ');
-                $("body").append("<link rel=\"shortcut icon\" href=\"" + options.HTMLPrefix + "favicon.ico\" />");
-                $("body").append("<link rel=\"apple-touch-icon\" href=\"" + options.HTMLPrefix + "apple-touch-icon.png\">");
-                $("body").append("<link rel=\"apple-touch-icon-precomposed\" href=\"" + options.HTMLPrefix + "apple-touch-icon-precomposed.png\">");
-                $("body").append("<link rel=\"apple-touch-icon-precomposed\" sizes=\"72x72\" href=\"" + options.HTMLPrefix + "apple-touch-icon-72x72-precomposed.png\">");
-                $("body").append("<link rel=\"apple-touch-icon-precomposed\" sizes=\"144x144\" href=\"" + options.HTMLPrefix + "apple-touch-icon-144x144-precomposed.png\">");
-                $("body").append("<link rel=\"apple-touch-icon-precomposed\" sizes=\"114x114\" href=\"" + options.HTMLPrefix + "apple-touch-icon-114x114-precomposed.png\">");
-                $("body").append("<link rel=\"apple-touch-icon-precomposed\" sizes=\"120x120\" href=\"" + options.HTMLPrefix + "apple-touch-icon-120x120-precomposed.png\">");
+                $("head").append("<link rel=\"shortcut icon\" href=\"" + options.HTMLPrefix + "favicon.ico\" />");
+                $("head").append("<link rel=\"icon\" type=\"image/png\" href=\"" + options.HTMLPrefix + "favicon.png\" />");
+                $("head").append("<link rel=\"apple-touch-icon\" href=\"" + options.HTMLPrefix + "apple-touch-icon.png\">");
+                $("head").append("<link rel=\"apple-touch-icon" + prefix + "\" href=\"" + options.HTMLPrefix + "apple-touch-icon" + prefix + ".png\">");
+                $("head").append("<link rel=\"apple-touch-icon" + prefix + "\" sizes=\"72x72\" href=\"" + options.HTMLPrefix + "apple-touch-icon-72x72" + prefix + ".png\">");
+                $("head").append("<link rel=\"apple-touch-icon" + prefix + "\" sizes=\"114x114\" href=\"" + options.HTMLPrefix + "apple-touch-icon-114x114" + prefix + ".png\">");
+                $("head").append("<link rel=\"apple-touch-icon" + prefix + "\" sizes=\"120x120\" href=\"" + options.HTMLPrefix + "apple-touch-icon-120x120" + prefix + ".png\">");
+                $("head").append("<link rel=\"apple-touch-icon" + prefix + "\" sizes=\"144x144\" href=\"" + options.HTMLPrefix + "apple-touch-icon-144x144" + prefix + ".png\">");
                 grunt.log.ok();
             }
 
@@ -192,9 +199,9 @@ module.exports = function(grunt) {
 
                 if (needHTML) {
                     // In HTML version background color will be as meta-tag
-                    $("body").append("<meta name=\"msapplication-TileImage\" content=\"" + options.HTMLPrefix + "tile-144x144.png\"/>");
+                    $("head").append("<meta name=\"msapplication-TileImage\" content=\"" + options.HTMLPrefix + "tile-144x144.png\"/>");
                     if (options.tileColor !== "none") {
-                        $("body").append("<meta name=\"msapplication-TileColor\" content=\"" + options.tileColor + "\"/>");
+                        $("head").append("<meta name=\"msapplication-TileColor\" content=\"" + options.tileColor + "\"/>");
                     }
 
                 } else {
@@ -209,10 +216,16 @@ module.exports = function(grunt) {
                 }
 
                 convert(combine(f, "144x144", "tile-144x144.png", additionalOpts));
-
                 grunt.log.ok();
 
             }
+
+            // Cleanup
+            ['16x16', '24x24', '32x32', '48x48'].forEach(function(size) {
+                fs.unlink(path.join(f.dest, size + '.png'));
+            });
+
+            // console.log($.html());
 
         });
     });
