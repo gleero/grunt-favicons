@@ -23,14 +23,15 @@ module.exports = function(grunt) {
             normal: {
                 options: {
                     html: 'test/index.html',
-                    appleTouchBackgroundColor: "#f9ba21",
+                    appleTouchBackgroundColor: "auto",
                     trueColor: false,
                     HTMLPrefix: "/media/images/",
                     windowsTile: true,
+                    precomposed: true,
                     tileBlackWhite: true,
                     tileColor: "auto" // none, auto, #color
                 },
-                src: 'test/test.png',
+                src: 'test/test3.png',
                 dest: 'test/out'
             }
         }
