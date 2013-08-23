@@ -226,14 +226,15 @@ module.exports = function(grunt) {
                         }
                     }
                     grunt.log.ok();
+
+                    // Saving HTML
+                    grunt.file.write(options.html, $.html());
                 }
 
                 // Cleanup
                 ['16x16', '32x32', '48x48'].forEach(function(size) {
                     fs.unlink(path.join(f.dest, size + '.png'));
                 });
-
-                console.log($.html());
 
             });
 
