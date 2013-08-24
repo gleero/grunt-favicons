@@ -10,44 +10,68 @@ module.exports = function(grunt) {
 
     grunt.initConfig({
 
-        // jshint: {
-        //     options: {
-        //         jshintrc: '.jshintrc'
-        //     },
-        //     files: [
-        //         'tasks/sprite.js',
-        //         'Gruntfile.js'
-        //     ]
-        // },
+        jshint: {
+            files: [
+                'tasks/favicons.js',
+                'Gruntfile.js'
+            ]
+        },
+
         favicons: {
-            normal: {
+            stage1: {
+                src: 'test/test.png',
+                dest: 'test/out'
+            },
+            stage2: {
                 options: {
-                    html: 'test/index.html',
-                    appleTouchBackgroundColor: "auto",
-                    trueColor: false,
-                    HTMLPrefix: "/media/images/",
-                    windowsTile: true,
-                    precomposed: true,
-                    tileBlackWhite: true,
-                    tileColor: "auto" // none, auto, #color
+                    html: 'test/out/test.html',
+                    trueColor: true,
+                    HTMLPrefix: "/images/icons/",
+                    windowsTile: false,
+                    precomposed: false
                 },
-                src: 'test/test3.png',
+                src: 'test/test.png',
+                dest: 'test/out'
+            },
+            stage3: {
+                options: {
+                    html: 'test/out/test.html',
+                    HTMLPrefix: "/icons/",
+                    windowsTile: true,
+                    tileColor: "none"
+                },
+                src: 'test/test.png',
                 dest: 'test/out'
             }
-        }
-        // nodeunit: {
-        //     tasks: ['test/*_test.js']
-        // },
-        // clean: ['test/tmp']
+        },
+
+        copy: {
+            files: {
+                src: 'test/index.html',
+                dest: 'test/out/test.html',
+            },
+        },
+
+        nodeunit: {
+            stage1: ['test/test_stage1.js'],
+            stage2: ['test/test_stage2.js'],
+            stage3: ['test/test_stage3.js']
+        },
+
+        clean: ['test/out']
     });
 
-    // grunt.loadNpmTasks('grunt-contrib-jshint');
-    // grunt.loadNpmTasks('grunt-contrib-nodeunit');
-    // grunt.loadNpmTasks('grunt-contrib-clean');
+    grunt.loadNpmTasks('grunt-contrib-jshint');
+    grunt.loadNpmTasks('grunt-contrib-nodeunit');
+    grunt.loadNpmTasks('grunt-contrib-copy');
+    grunt.loadNpmTasks('grunt-contrib-clean');
     grunt.loadTasks('tasks');
 
-    grunt.registerTask('default', ['favicons']);
-    // grunt.registerTask('default', ['jshint', 'clean', 'sprite', 'nodeunit', 'clean']);
-    // grunt.registerTask('build', ['clean']);
+    // Default options
+    grunt.registerTask('stage1', ['clean', 'copy', 'favicons:stage1', 'nodeunit:stage1']);
+    grunt.registerTask('stage2', ['clean', 'copy', 'favicons:stage2', 'nodeunit:stage2']);
+    grunt.registerTask('stage3', ['clean', 'copy', 'favicons:stage3', 'nodeunit:stage3']);
+
+    grunt.registerTask('default', ['jshint', 'stage1', 'stage2', 'stage3', 'clean']);
 
 };
