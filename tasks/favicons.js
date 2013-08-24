@@ -6,13 +6,13 @@
  * Licensed under the MIT license.
  */
 
-'use strict';
-
 var path = require('path');
 var fs = require('fs');
 var execSync = require("execSync");
 
 module.exports = function(grunt) {
+
+    "use strict";
 
     // Convert image with imagemagick
     var convert = function(args) {
@@ -64,7 +64,7 @@ module.exports = function(grunt) {
         });
 
         // Append all icons to HTML as meta tags (needs cheerio)
-        var needHTML = options.html !== undefined && grunt.file.exists(options.html);
+        var needHTML = options.html !== undefined && options.html !== "" && grunt.file.exists(options.html);
 
         if (needHTML) {
             var cheerio = require("cheerio");
