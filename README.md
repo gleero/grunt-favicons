@@ -2,11 +2,37 @@
 
 Generates all known types and sizes icons from PNG image. Uses ImageMagick.
 
+***Input***: square logo in png.
 
+***Output***:
 
+- `favicon.ico` (16x16, 32x32, 48x48) — desktop browsers, address bar, tabs, safari reading list, non-retina iPhone, windows 7+ taskbar, windows desktop;
+- `favicon.png` (64x64) — modern browsers;
+- `apple-touch-icon.png` (57x57) — iPhone non-retina, Android 2.1+;
+- `apple-touch-icon-72x72.png` (72x72) — iPad non-retina;
+- `apple-touch-icon-114x114.png` (114x114) — iPhone retina, iOS 6 and lower;
+- `apple-touch-icon-120x120.png` (120x120) — iPhone retina, iOS 7 and higher;
+- `apple-touch-icon-144x144.png` (144x144) — iPad retina;
+- `windows-tile-144x144.png` (144x144) — Windows 8 tile.
+
+Adds changes to `html` file.
 
 ## Getting Started
-This plugin requires Grunt `~0.4.1`
+This plugin requires Grunt `~0.4.1` and ImageMagick.
+
+Installing ImageMagick:
+
+_on Mac:_
+
+```shell
+brew install imagemagick
+```
+
+_on Linux:_
+
+```shell
+apt-get install imagemagick
+```
 
 If you haven't used [Grunt](http://gruntjs.com/) before, be sure to check out the [Getting Started](http://gruntjs.com/getting-started) guide, as it explains how to create a [Gruntfile](http://gruntjs.com/sample-gruntfile) as well as install and use Grunt plugins. Once you're familiar with that process, you may install this plugin with this command:
 
@@ -40,47 +66,92 @@ grunt.initConfig({
 
 ### Options
 
-#### options.separator
+#### options.html
 Type: `String`
-Default value: `',  '`
+Default value: `''`
 
-A string value that is used to do something with whatever.
+Path to HTML you want to add links to icons.
 
-#### options.punctuation
+#### options.HTMLPrefix
 Type: `String`
-Default value: `'.'`
+Default value: `''`
 
-A string value that is used to do something else with whatever else.
+The path to the folder that contains the icons.
+
+#### options.trueColor
+Type: `Boolean`
+Default value: `false`
+
+Use true color favicon.ico or 256 сolor. True color are larger.
+
+#### options.precomposed
+Type: `Boolean`
+Default value: `true`
+
+When is false Safari on iOS < 7 add any effects to the icon.
+
+#### options.appleTouchBackgroundColor
+Type: `String`
+Default value: `auto`
+Values: `auto|none|#COLOR`
+
+iOS icon can't be transparent. It needs background. If option set to `auto` color is selected automatically. `none` leaves transparency.
+
+#### options.windowsTile
+Type: `Boolean`
+Default value: `true`
+
+Add Windows 8 tile icon.
+
+#### options.tileBlackWhite
+Type: `Boolean`
+Default value: `true`
+
+Make white-only icon on Windows 8 tile.
+
+#### options.tileColor
+Type: `String`
+Default value: `auto`
+Values: `auto|none|#COLOR`
+
+Background color for Windows 8 tile. If option set to `auto` color is selected automatically. `none` leaves transparency.
 
 ### Usage Examples
 
 #### Default Options
-In this example, the default options are used to do something with whatever. So if the `testing` file has the content `Testing` and the `123` file had the content `1 2 3`, the generated result would be `Testing, 1 2 3.`
+In this example, the default options are used to create `favicon.ico`, `favicon.png`, apple touch icons and windows 8 tile.
 
 ```js
 grunt.initConfig({
   favicons: {
     options: {},
-    files: {
-      'dest/default_options': ['src/testing', 'src/123'],
-    },
+    icons: {
+      src: 'src/logo.png',
+      dest: 'build/images'
+    }
   },
 })
 ```
 
 #### Custom Options
-In this example, custom options are used to do something else with whatever else. So if the `testing` file has the content `Testing` and the `123` file had the content `1 2 3`, the generated result in this case would be `Testing: 1 2 3 !!!`
 
 ```js
 grunt.initConfig({
   favicons: {
     options: {
-      separator: ': ',
-      punctuation: ' !!!',
+      trueColor: true,
+      precomposed: true,
+      appleTouchBackgroundColor: "#e2b2c2",
+      windowsTile: true,
+      tileBlackWhite: false,
+      tileColor: "auto",
+      html: 'build/out/index.html',
+      HTMLPrefix: "/images/icons/"
     },
-    files: {
-      'dest/default_options': ['src/testing', 'src/123'],
-    },
+    icons: {
+      src: 'src/logo.png',
+      dest: 'build/images/icons'
+    }
   },
 })
 ```
