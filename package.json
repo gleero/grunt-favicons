@@ -45,6 +45,14 @@
     "grunt": "~0.4.1"
   },
   "keywords": [
-    "gruntplugin"
+    "gruntplugin",
+    "favicon",
+    "icons",
+    "png",
+    "ico",
+    "jpg",
+    "ios",
+    "android",
+    "wp8"
   ]
 }
