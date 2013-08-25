@@ -72,6 +72,7 @@ module.exports = function(grunt) {
     grunt.registerTask('stage2', ['clean', 'copy', 'favicons:stage2', 'nodeunit:stage2']);
     grunt.registerTask('stage3', ['clean', 'copy', 'favicons:stage3', 'nodeunit:stage3']);
 
-    grunt.registerTask('default', ['jshint', 'stage1', 'stage2', 'stage3', 'clean']);
+    grunt.registerTask('test', ['jshint', 'stage1', 'stage2', 'stage3', 'clean']);
+    grunt.registerTask('default', ['test']);
 
 };
