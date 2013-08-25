@@ -14,7 +14,10 @@ module.exports = function(grunt) {
             files: [
                 'tasks/favicons.js',
                 'Gruntfile.js'
-            ]
+            ],
+            options: {
+                jshintrc: '.jshintrc'
+            }
         },
 
         favicons: {
