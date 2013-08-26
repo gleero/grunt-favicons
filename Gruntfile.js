@@ -51,8 +51,8 @@ module.exports = function(grunt) {
         copy: {
             files: {
                 src: 'test/index.html',
-                dest: 'test/out/test.html',
-            },
+                dest: 'test/out/test.html'
+            }
         },
 
         nodeunit: {
