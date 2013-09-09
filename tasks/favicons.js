@@ -59,6 +59,7 @@ module.exports = function(grunt) {
             HTMLPrefix: "",
             appleTouchBackgroundColor: "auto", // none, auto, #color
             windowsTile: true,
+            coast: false,
             tileBlackWhite: true,
             tileColor: "auto" // none, auto, #color
         });
@@ -91,16 +92,26 @@ module.exports = function(grunt) {
             // Iterate source files
             f.src.forEach(function(source) {
 
-                // Creating resized version of source image
+                var resolmap = {};
+
+                // Create resized version of source image
                 // 16x16: desktop browsers, address bar, tabs
                 // 32x32: safari reading list, non-retina iPhone, windows 7+ taskbar
                 // 48x48: windows desktop
 
                 var files = [];
+                var ext = path.extname(source);
+                var basename = path.basename(source, ext);
+                var dirname = path.dirname(source);
                 grunt.log.write('Resizing images for "' + source + '"... ');
                 ['16x16', '32x32', '48x48'].forEach(function(size) {
+                    var p = path.join(dirname, basename + "." + size + ext);
                     var saveTo = path.join(f.dest, size + '.png');
-                    convert([source, '-resize', size, saveTo]);
+                    var src = source;
+                    if (path.existsSync(p)) {
+                        src = p;
+                    }
+                    convert([src, '-resize', size, saveTo]);
                     files.push(saveTo);
                 });
                 grunt.log.ok();
@@ -162,6 +173,13 @@ module.exports = function(grunt) {
                 convert(combine(source, f.dest, "144x144", "apple-touch-icon-144x144" + prefix + ".png", additionalOpts));
                 grunt.log.ok();
 
+                // 228х228: Coast
+                if (options.coast) {
+                    grunt.log.write('coast-icon-228x228.png... ');
+                    convert(combine(source, f.dest, "228x228", "coast-icon-228x228.png", additionalOpts));
+                    grunt.log.ok();
+                }
+
                 ////// Windows 8 Tile
 
                 if (options.windowsTile) {
@@ -212,6 +230,9 @@ module.exports = function(grunt) {
                     grunt.log.write('Updating HTML... ');
                     $("head").append("<link rel=\"shortcut icon\" href=\"" + options.HTMLPrefix + "favicon.ico\" />");
                     $("head").append("<link rel=\"icon\" type=\"image/png\" href=\"" + options.HTMLPrefix + "favicon.png\" />");
+                    if (options.coast) {
+                        $("head").append("<link rel=\"icon\" sizes=\"228x228\" href=\"" + options.HTMLPrefix + "coast-icon-228x228.png\" />");
+                    }
                     $("head").append("<link rel=\"apple-touch-icon\" href=\"" + options.HTMLPrefix + "apple-touch-icon.png\">");
                     $("head").append("<link rel=\"apple-touch-icon" + prefix + "\" href=\"" + options.HTMLPrefix + "apple-touch-icon" + prefix + ".png\">");
                     $("head").append("<link rel=\"apple-touch-icon" + prefix + "\" sizes=\"72x72\" href=\"" + options.HTMLPrefix + "apple-touch-icon-72x72" + prefix + ".png\">");

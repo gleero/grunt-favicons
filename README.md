@@ -2,7 +2,7 @@
 
 Generates all known types and sizes icons from PNG image. Uses ImageMagick.
 
-***Input***: square logo in png.
+***Input***: square logo in png. You can also keep near the source files with resolution prefix e.g. `source.16x16.png`.
 
 ***Output***:
 
@@ -13,7 +13,8 @@ Generates all known types and sizes icons from PNG image. Uses ImageMagick.
 - `apple-touch-icon-114x114.png` (114x114) — iPhone retina, iOS 6 and lower;
 - `apple-touch-icon-120x120.png` (120x120) — iPhone retina, iOS 7 and higher;
 - `apple-touch-icon-144x144.png` (144x144) — iPad retina;
-- `windows-tile-144x144.png` (144x144) — Windows 8 tile.
+- `windows-tile-144x144.png` (144x144) — Windows 8 tile;
+- `coast-icon-228x228.png` (228x228) - Coast browser.
 
 Adds changes to `html` file.
 
@@ -103,6 +104,13 @@ Default value: `true`
 
 Add Windows 8 tile icon.
 
+#### options.coast
+Type: `Boolean`
+Default value: `false`
+
+Add 228x228 icon for [Coast browser](http://coastbyopera.com/).
+
+
 #### options.tileBlackWhite
 Type: `Boolean`
 Default value: `true`
@@ -115,6 +123,10 @@ Default value: `auto`
 Values: `auto|none|#COLOR`
 
 Background color for Windows 8 tile. If option set to `auto` color is selected automatically. `none` leaves transparency.
+
+### Low resolution
+
+If you reduce the image to 16x16, it will blured. To avoid this, you can put near source image the prefixes. For example: source image called `logo.png`. If you put nearly `logo.16x16.png` then it will be used.
 
 ### Usage Examples
 
@@ -160,4 +172,9 @@ grunt.initConfig({
 In lieu of a formal styleguide, take care to maintain the existing coding style. Add unit tests for any new or changed functionality. Lint and test your code using [Grunt](http://gruntjs.com/).
 
 ## Release History
-_(Nothing yet)_
+
+### 2013-09-09 v0.2.0
+
+* Added source image prefix;
+* 228х228 Coast browser support;
+* Readme.md fix.
