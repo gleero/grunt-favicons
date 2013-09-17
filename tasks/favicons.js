@@ -65,11 +65,11 @@ module.exports = function(grunt) {
         });
 
         // Append all icons to HTML as meta tags (needs cheerio)
-        var needHTML = options.html !== undefined && options.html !== "" && grunt.file.exists(options.html);
+        var needHTML = options.html !== undefined && options.html !== "";
 
         if (needHTML) {
             var cheerio = require("cheerio");
-            var contents = grunt.file.read(options.html);
+            var contents = (grunt.file.exists(options.html))?grunt.file.read(options.html):"";
             var $ = cheerio.load(contents);
             // Removing exists favicon from HTML
             $('link[rel="shortcut icon"]').remove();
@@ -228,24 +228,32 @@ module.exports = function(grunt) {
                 // Append icons to <HEAD>
                 if (needHTML) {
                     grunt.log.write('Updating HTML... ');
-                    $("head").append("<link rel=\"shortcut icon\" href=\"" + options.HTMLPrefix + "favicon.ico\" />");
-                    $("head").append("<link rel=\"icon\" type=\"image/png\" href=\"" + options.HTMLPrefix + "favicon.png\" />");
+                    var elements = "";
+                    elements += "<link rel=\"shortcut icon\" href=\"" + options.HTMLPrefix + "favicon.ico\" />";
+                    elements += "<link rel=\"icon\" type=\"image/png\" href=\"" + options.HTMLPrefix + "favicon.png\" />";
                     if (options.coast) {
-                        $("head").append("<link rel=\"icon\" sizes=\"228x228\" href=\"" + options.HTMLPrefix + "coast-icon-228x228.png\" />");
+                      elements += "<link rel=\"icon\" sizes=\"228x228\" href=\"" + options.HTMLPrefix + "coast-icon-228x228.png\" />";
                     }
-                    $("head").append("<link rel=\"apple-touch-icon\" href=\"" + options.HTMLPrefix + "apple-touch-icon.png\">");
-                    $("head").append("<link rel=\"apple-touch-icon" + prefix + "\" href=\"" + options.HTMLPrefix + "apple-touch-icon" + prefix + ".png\">");
-                    $("head").append("<link rel=\"apple-touch-icon" + prefix + "\" sizes=\"72x72\" href=\"" + options.HTMLPrefix + "apple-touch-icon-72x72" + prefix + ".png\">");
-                    $("head").append("<link rel=\"apple-touch-icon" + prefix + "\" sizes=\"114x114\" href=\"" + options.HTMLPrefix + "apple-touch-icon-114x114" + prefix + ".png\">");
-                    $("head").append("<link rel=\"apple-touch-icon" + prefix + "\" sizes=\"120x120\" href=\"" + options.HTMLPrefix + "apple-touch-icon-120x120" + prefix + ".png\">");
-                    $("head").append("<link rel=\"apple-touch-icon" + prefix + "\" sizes=\"144x144\" href=\"" + options.HTMLPrefix + "apple-touch-icon-144x144" + prefix + ".png\">");
+                    elements += "<link rel=\"apple-touch-icon\" href=\"" + options.HTMLPrefix + "apple-touch-icon.png\">";
+                    elements += "<link rel=\"apple-touch-icon" + prefix + "\" href=\"" + options.HTMLPrefix + "apple-touch-icon" + prefix + ".png\">";
+                    elements += "<link rel=\"apple-touch-icon" + prefix + "\" sizes=\"72x72\" href=\"" + options.HTMLPrefix + "apple-touch-icon-72x72" + prefix + ".png\">";
+                    elements += "<link rel=\"apple-touch-icon" + prefix + "\" sizes=\"114x114\" href=\"" + options.HTMLPrefix + "apple-touch-icon-114x114" + prefix + ".png\">";
+                    elements += "<link rel=\"apple-touch-icon" + prefix + "\" sizes=\"120x120\" href=\"" + options.HTMLPrefix + "apple-touch-icon-120x120" + prefix + ".png\">";
+                    elements += "<link rel=\"apple-touch-icon" + prefix + "\" sizes=\"144x144\" href=\"" + options.HTMLPrefix + "apple-touch-icon-144x144" + prefix + ".png\">";
                     // Windows 8 tile. In HTML version background color will be as meta-tag
                     if (options.windowsTile) {
-                        $("head").append("<meta name=\"msapplication-TileImage\" content=\"" + options.HTMLPrefix + "windows-tile-144x144.png\"/>");
+                        elements += "<meta name=\"msapplication-TileImage\" content=\"" + options.HTMLPrefix + "windows-tile-144x144.png\"/>";
                         if (options.tileColor !== "none") {
-                            $("head").append("<meta name=\"msapplication-TileColor\" content=\"" + options.tileColor + "\"/>");
+                            elements += "<meta name=\"msapplication-TileColor\" content=\"" + options.tileColor + "\"/>";
                         }
                     }
+                    
+                    if($('*').length>0){
+                      $("head").append(elements);
+                    }else{
+                      $.root().append(elements);
+                    }
+                    
                     grunt.log.ok();
 
                     // Saving HTML
