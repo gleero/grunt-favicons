@@ -180,7 +180,7 @@ module.exports = function(grunt) {
 
                 // 152x152: iPad retina, iOS 7 and higher
                 grunt.log.write('apple-touch-icon-152x152-precomposed.png... ');
-                convert(combine(source, f.dest, "152x152", "apple-touch-icon-144x144-precomposed.png", additionalOpts));
+                convert(combine(source, f.dest, "152x152", "apple-touch-icon-152x152-precomposed.png", additionalOpts));
                 grunt.log.ok();
 
                 // 228х228: Coast

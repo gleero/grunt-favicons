@@ -96,17 +96,17 @@ exports.favicons = {
     // apple-touch-icon-120x120.png exists
     ati120Exists: function(test) {
         test.expect(1);
-        var exists = fs.existsSync(path + "/apple-touch-icon-120x120.png");
-        test.ok(exists, 'apple-touch-icon-120x120.png is not exists.');
+        var exists = fs.existsSync(path + "/apple-touch-icon-120x120-precomposed.png");
+        test.ok(exists, 'apple-touch-icon-120x120-precomposed.png is not exists.');
         test.done();
     },
 
     // apple-touch-icon-120x120.png dimensions
     ati120Dim: function(test) {
         test.expect(1);
-        var dimensions = sizeOf(path + "/apple-touch-icon-120x120.png");
+        var dimensions = sizeOf(path + "/apple-touch-icon-120x120-precomposed.png");
         var pass = dimensions.width === 120 && dimensions.height === 120;
-        test.ok(pass, 'apple-touch-icon-120x120.png is not 120x120.');
+        test.ok(pass, 'apple-touch-icon-120x120-precomposed.png is not 120x120.');
         test.done();
     },
 
@@ -131,7 +131,7 @@ exports.favicons = {
     htmlsum: function(test) {
         test.expect(1);
         var original = crypto.createHash('sha1').update(grunt.file.read(path + '/test.html')).digest('hex');
-        test.ok(original === '1791829c4c6168bbfc4ae7436cc91756bea39180', 'html hashsum not valid');
+        test.ok(original === '8b98c2ff9a4c2e7557d9c007628ba0df7fb9815f', 'html hashsum not valid');
         test.done();
     }
 

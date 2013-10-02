@@ -26,11 +26,28 @@ exports.favicons = {
         test.done();
     },
 
+    // coast-icon-228x228.png exists
+    ci228Exists: function(test) {
+        test.expect(1);
+        var exists = fs.existsSync(path + "/coast-icon-228x228.png");
+        test.ok(exists, 'coast-icon-228x228.png is not exists.');
+        test.done();
+    },
+
+    // coast-icon-228x228.png dimensions
+    ci228Dim: function(test) {
+        test.expect(1);
+        var dimensions = sizeOf(path + "/coast-icon-228x228.png");
+        var pass = dimensions.width === 228 && dimensions.height === 228;
+        test.ok(pass, 'coast-icon-228x228.png is not 228x228.');
+        test.done();
+    },
+
     // html test hashsum
     htmlsum: function(test) {
         test.expect(1);
         var original = crypto.createHash('sha1').update(grunt.file.read(path + '/test.html')).digest('hex');
-        test.ok(original === '0f2a015c65c68287cf7f4f980847405f53e77421', 'html hashsum not valid');
+        test.ok(original === 'ff6dce538bcad6bf6c31cd32bbd6b9eaedb2367a', 'html hashsum not valid');
         test.done();
     }
 
