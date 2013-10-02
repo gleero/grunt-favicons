@@ -92,7 +92,6 @@ Type: `Boolean`
 Default value: `true`
 
 When is false Safari on iOS < 7 add any effects to the icon.
-![options.precomposed](http://gleero.com/pictures/precomposed.png)
 
 ![options.precomposed](http://gleero.com/pictures/precomposed.png)
 
@@ -102,7 +101,6 @@ Default value: `auto`
 Values: `auto|none|#COLOR`
 
 iOS icon can't be transparent. It needs background. If option set to `auto` color is selected automatically. `none` leaves transparency.
-![options.appleTouchBackgroundColor](http://gleero.com/pictures/diffapple.png)
 
 ![options.appleTouchBackgroundColor](http://gleero.com/pictures/diffapple.png)
 
@@ -124,7 +122,6 @@ Type: `Boolean`
 Default value: `true`
 
 Make white-only icon on Windows 8 tile.
-![options.tileBlackWhite](http://gleero.com/pictures/windowstile.png)
 
 ![options.tileBlackWhite](http://gleero.com/pictures/windowstile.png)
 
