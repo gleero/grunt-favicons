@@ -153,9 +153,14 @@ module.exports = function(grunt) {
                     grunt.log.ok();
                 }
 
-                // 72x72: iPad non-retina
+                // 72x72: iPad non-retina, iOS 6 and lower
                 grunt.log.write('apple-touch-icon-72x72' + prefix + '.png... ');
                 convert(combine(source, f.dest, "72x72", "apple-touch-icon-72x72" + prefix + ".png", additionalOpts));
+                grunt.log.ok();
+
+                // 76x76: iPad non-retina, iOS 7 and higher
+                grunt.log.write('apple-touch-icon-76x76-precomposed.png... ');
+                convert(combine(source, f.dest, "76x76", "apple-touch-icon-76x76-precomposed.png", additionalOpts));
                 grunt.log.ok();
 
                 // 114x114: iPhone retina, iOS 6 and lower
@@ -164,13 +169,18 @@ module.exports = function(grunt) {
                 grunt.log.ok();
 
                 // 120x120: iPhone retina, iOS 7 and higher
-                grunt.log.write('apple-touch-icon-120x120' + prefix + '.png... ');
-                convert(combine(source, f.dest, "120x120", "apple-touch-icon-120x120" + prefix + ".png", additionalOpts));
+                grunt.log.write('apple-touch-icon-120x120-precomposed.png... ');
+                convert(combine(source, f.dest, "120x120", "apple-touch-icon-120x120-precomposed.png", additionalOpts));
                 grunt.log.ok();
 
-                // 144x144: iPad retina
+                // 144x144: iPad retina, iOS 6 and lower
                 grunt.log.write('apple-touch-icon-144x144' + prefix + '.png... ');
                 convert(combine(source, f.dest, "144x144", "apple-touch-icon-144x144" + prefix + ".png", additionalOpts));
+                grunt.log.ok();
+
+                // 152x152: iPad retina, iOS 7 and higher
+                grunt.log.write('apple-touch-icon-152x152-precomposed.png... ');
+                convert(combine(source, f.dest, "152x152", "apple-touch-icon-144x144-precomposed.png", additionalOpts));
                 grunt.log.ok();
 
                 // 228х228: Coast
@@ -237,9 +247,11 @@ module.exports = function(grunt) {
                     elements += "<link rel=\"apple-touch-icon\" href=\"" + options.HTMLPrefix + "apple-touch-icon.png\">";
                     elements += "<link rel=\"apple-touch-icon" + prefix + "\" href=\"" + options.HTMLPrefix + "apple-touch-icon" + prefix + ".png\">";
                     elements += "<link rel=\"apple-touch-icon" + prefix + "\" sizes=\"72x72\" href=\"" + options.HTMLPrefix + "apple-touch-icon-72x72" + prefix + ".png\">";
+                    elements += "<link rel=\"apple-touch-icon-precomposed\" sizes=\"76x76\" href=\"" + options.HTMLPrefix + "apple-touch-icon-76x76-precomposed.png\">";
                     elements += "<link rel=\"apple-touch-icon" + prefix + "\" sizes=\"114x114\" href=\"" + options.HTMLPrefix + "apple-touch-icon-114x114" + prefix + ".png\">";
-                    elements += "<link rel=\"apple-touch-icon" + prefix + "\" sizes=\"120x120\" href=\"" + options.HTMLPrefix + "apple-touch-icon-120x120" + prefix + ".png\">";
+                    elements += "<link rel=\"apple-touch-icon-precomposed\" sizes=\"120x120\" href=\"" + options.HTMLPrefix + "apple-touch-icon-120x120-precomposed.png\">";
                     elements += "<link rel=\"apple-touch-icon" + prefix + "\" sizes=\"144x144\" href=\"" + options.HTMLPrefix + "apple-touch-icon-144x144" + prefix + ".png\">";
+                    elements += "<link rel=\"apple-touch-icon-precomposed\" sizes=\"152x152\" href=\"" + options.HTMLPrefix + "apple-touch-icon-152x152-precomposed.png\">";
                     // Windows 8 tile. In HTML version background color will be as meta-tag
                     if (options.windowsTile) {
                         elements += "<meta name=\"msapplication-TileImage\" content=\"" + options.HTMLPrefix + "windows-tile-144x144.png\"/>";
@@ -247,13 +259,13 @@ module.exports = function(grunt) {
                             elements += "<meta name=\"msapplication-TileColor\" content=\"" + options.tileColor + "\"/>";
                         }
                     }
-                    
+
                     if($('*').length>0){
                       $("head").append(elements);
                     }else{
                       $.root().append(elements);
                     }
-                    
+
                     grunt.log.ok();
 
                     // Saving HTML

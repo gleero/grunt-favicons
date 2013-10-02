@@ -10,9 +10,11 @@ Generates all known types and sizes icons from PNG image. Uses ImageMagick.
 - `favicon.png` (64x64) — modern browsers;
 - `apple-touch-icon.png` (57x57) — iPhone non-retina, Android 2.1+;
 - `apple-touch-icon-72x72.png` (72x72) — iPad non-retina;
+- `apple-touch-icon-76x76.png` (76x76) — iPad non-retina iOS 7;
 - `apple-touch-icon-114x114.png` (114x114) — iPhone retina, iOS 6 and lower;
 - `apple-touch-icon-120x120.png` (120x120) — iPhone retina, iOS 7 and higher;
 - `apple-touch-icon-144x144.png` (144x144) — iPad retina;
+- `apple-touch-icon-144x144.png` (152x152) — iPad retina iOS 7;
 - `windows-tile-144x144.png` (144x144) — Windows 8 tile;
 - `coast-icon-228x228.png` (228x228) - Coast browser.
 
@@ -173,8 +175,14 @@ In lieu of a formal styleguide, take care to maintain the existing coding style.
 
 ## Release History
 
+### 2013-10-02 v0.3.0
+
+* Add 76x76 for iPad non-retina iOS 7;
+* Add 152x152 for iPad retina iOS 7;
+* Disable `non-precomposed` icons for iOS 7 (is no longer supported).
+
 ### 2013-09-09 v0.2.0
 
-* Added source image prefix;
+* Add source image prefix;
 * 228х228 Coast browser support;
 * Readme.md fix.
