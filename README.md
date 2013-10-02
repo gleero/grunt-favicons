@@ -93,12 +93,16 @@ Default value: `true`
 
 When is false Safari on iOS < 7 add any effects to the icon.
 
+![options.precomposed](http://gleero.com/pictures/precomposed.png)
+
 #### options.appleTouchBackgroundColor
 Type: `String`
 Default value: `auto`
 Values: `auto|none|#COLOR`
 
 iOS icon can't be transparent. It needs background. If option set to `auto` color is selected automatically. `none` leaves transparency.
+
+![options.appleTouchBackgroundColor](http://gleero.com/pictures/diffapple.png)
 
 #### options.windowsTile
 Type: `Boolean`
@@ -118,6 +122,8 @@ Type: `Boolean`
 Default value: `true`
 
 Make white-only icon on Windows 8 tile.
+
+![options.tileBlackWhite](http://gleero.com/pictures/windowstile.png)
 
 #### options.tileColor
 Type: `String`
@@ -172,6 +178,12 @@ grunt.initConfig({
 
 ## Contributing
 In lieu of a formal styleguide, take care to maintain the existing coding style. Add unit tests for any new or changed functionality. Lint and test your code using [Grunt](http://gruntjs.com/).
+
+## Feedback
+Author: Vladimir Perekladov
+Website: [gleero.com](http://gleero.com/)
+E-mail: [gleero@gmail.com](mailto:gleero@gmail.com)
+
 
 ## Release History
 
