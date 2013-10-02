@@ -181,7 +181,9 @@ In lieu of a formal styleguide, take care to maintain the existing coding style.
 
 ## Feedback
 Author: Vladimir Perekladov
+
 Website: [gleero.com](http://gleero.com/)
+
 E-mail: [gleero@gmail.com](mailto:gleero@gmail.com)
 
 
