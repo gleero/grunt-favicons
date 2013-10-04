@@ -121,7 +121,7 @@ module.exports = function(grunt) {
                 convert(files.concat([
                     "-alpha on",
                     "-background none",
-                    !options.trueColor ? "-colors 256" : "",
+                    options.trueColor ? "" : "-bordercolor white -border 0 -colors 64",
                     path.join(f.dest, 'favicon.ico')
                 ]));
                 grunt.log.ok();
@@ -240,7 +240,7 @@ module.exports = function(grunt) {
                     grunt.log.write('Updating HTML... ');
                     var elements = "";
                     elements += "<link rel=\"shortcut icon\" href=\"" + options.HTMLPrefix + "favicon.ico\" />";
-                    elements += "<link rel=\"icon\" type=\"image/png\" href=\"" + options.HTMLPrefix + "favicon.png\" />";
+                    elements += "<link rel=\"icon\" type=\"image/png\" sizes=\"64x64\" href=\"" + options.HTMLPrefix + "favicon.png\" />";
                     if (options.coast) {
                       elements += "<link rel=\"icon\" sizes=\"228x228\" href=\"" + options.HTMLPrefix + "coast-icon-228x228.png\" />";
                     }
