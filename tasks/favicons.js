@@ -84,9 +84,8 @@ module.exports = function(grunt) {
             }
 
             if (!grunt.file.isDir(f.dest)) {
-                return grunt.warn (
-                    'Dest "' + f.dest + '" in target "' + target + '" must be a directory and exists.'
-                );
+                grunt.file.mkdir(f.dest);
+                grunt.log.ok('Created output folder at "', f.dest, '"');
             }
 
             // Iterate source files
@@ -108,7 +107,7 @@ module.exports = function(grunt) {
                     var p = path.join(dirname, basename + "." + size + ext);
                     var saveTo = path.join(f.dest, size + '.png');
                     var src = source;
-                    if (path.existsSync(p)) {
+                    if (fs.existsSync(p)) {
                         src = p;
                     }
                     convert([src, '-resize', size, saveTo]);
