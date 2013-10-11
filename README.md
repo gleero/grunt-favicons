@@ -189,6 +189,10 @@ E-mail: [gleero@gmail.com](mailto:gleero@gmail.com)
 
 ## Release History
 
+### 2013-10-11 v0.3.2
+
+* [#3](https://github.com/gleero/grunt-favicons/pull/3) If destination folder does not exist, create it and continue.
+
 ### 2013-10-02 v0.3.0
 
 * Add 76x76 for iPad non-retina iOS 7;
