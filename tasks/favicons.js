@@ -69,7 +69,7 @@ module.exports = function(grunt) {
 
         if (needHTML) {
             var cheerio = require("cheerio");
-            var contents = (grunt.file.exists(options.html))?grunt.file.read(options.html):"";
+            var contents = (grunt.file.exists(options.html)) ? grunt.file.read(options.html) : "";
             var $ = cheerio.load(contents);
             // Removing exists favicon from HTML
             $('link[rel="shortcut icon"]').remove();
@@ -259,16 +259,23 @@ module.exports = function(grunt) {
                         }
                     }
 
-                    if($('*').length>0){
+                    if($('*').length > 0) {
                       $("head").append(elements);
-                    }else{
+                    } else {
                       $.root().append(elements);
                     }
 
-                    grunt.log.ok();
+                    var out = $.html();
+
+                    // Hack for php tags
+                    if (path.extname(options.html) === ".php") {
+                        out = out.replace(/&lt;\?/gi, '<?').replace(/\?&gt;/gi, '?>');
+                    }
 
                     // Saving HTML
-                    grunt.file.write(options.html, $.html());
+                    grunt.file.write(options.html, out);
+
+                    grunt.log.ok();
                 }
 
                 // Cleanup

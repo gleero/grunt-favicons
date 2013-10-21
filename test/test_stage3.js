@@ -46,8 +46,8 @@ exports.favicons = {
     // html test hashsum
     htmlsum: function(test) {
         test.expect(1);
-        var original = crypto.createHash('sha1').update(grunt.file.read(path + '/test.html')).digest('hex');
-        test.ok(original === '814f910a0feadb8388e0582f47192d08f5eb9ffa', 'html hashsum not valid');
+        var original = crypto.createHash('sha1').update(grunt.file.read(path + '/test.php')).digest('hex');
+        test.ok(original === '7adee31e8a6d5e3345b6851b386415a53d8501b3', 'php file hashsum not valid');
         test.done();
     }
 

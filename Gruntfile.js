@@ -38,8 +38,8 @@ module.exports = function(grunt) {
             },
             stage3: {
                 options: {
-                    html: 'test/out/test.html',
-                    HTMLPrefix: "/icons/",
+                    html: 'test/out/test.php',
+                    HTMLPrefix: "<?= SITE_TEMPLATE_PATH; ?>/icons/",
                     windowsTile: true,
                     tileColor: "none",
                     coast: true
@@ -50,9 +50,13 @@ module.exports = function(grunt) {
         },
 
         copy: {
-            files: {
+            html: {
                 src: 'test/index.html',
                 dest: 'test/out/test.html'
+            },
+            php: {
+                src: 'test/index.html',
+                dest: 'test/out/test.php'
             }
         },
 
@@ -74,7 +78,7 @@ module.exports = function(grunt) {
     // Default options
     grunt.registerTask('stage1', ['clean', 'copy', 'favicons:stage1', 'nodeunit:stage1']);
     grunt.registerTask('stage2', ['clean', 'copy', 'favicons:stage2', 'nodeunit:stage2']);
-    grunt.registerTask('stage3', ['clean', 'copy', 'favicons:stage3', 'nodeunit:stage3']);
+    grunt.registerTask('stage3', ['clean', 'copy:php', 'favicons:stage3', 'nodeunit:stage3']);
 
     grunt.registerTask('test', ['jshint', 'stage1', 'stage2', 'stage3', 'clean']);
     grunt.registerTask('default', ['test']);
