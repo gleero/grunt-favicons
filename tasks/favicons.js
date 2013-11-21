@@ -74,6 +74,12 @@ module.exports = function(grunt) {
             // Removing exists favicon from HTML
             $('link[rel="shortcut icon"]').remove();
             $('link[rel="icon"]').remove();
+            $('link[rel="apple-touch-icon"]').remove();
+            $('link[rel="apple-touch-icon-precomposed"]').remove();
+            if (options.windowsTile) {
+                $('meta[name="msapplication-TileImage"]').remove();
+                $('meta[name="msapplication-TileColor"]').remove();
+            }
         }
 
         // Iterate over all specified file groups.
