@@ -31,7 +31,9 @@ module.exports = function(grunt) {
                     trueColor: true,
                     HTMLPrefix: "/images/icons/",
                     windowsTile: false,
-                    precomposed: false
+                    precomposed: false,
+                    firefox: true,
+                    firefoxManifest: 'test/out/manifest.webapp'
                 },
                 src: 'test/test.png',
                 dest: 'test/out'
@@ -42,8 +44,7 @@ module.exports = function(grunt) {
                     HTMLPrefix: "<?= SITE_TEMPLATE_PATH; ?>/icons/",
                     windowsTile: true,
                     tileColor: "none",
-                    coast: true,
-                    firefox: true
+                    coast: true
                 },
                 src: 'test/test.png',
                 dest: 'test/out'
@@ -58,6 +59,10 @@ module.exports = function(grunt) {
             php: {
                 src: 'test/index.html',
                 dest: 'test/out/test.php'
+            },
+            manifest: {
+                src: 'test/manifest.webapp',
+                dest: 'test/out/manifest.webapp'
             }
         },
 
@@ -79,7 +84,7 @@ module.exports = function(grunt) {
     // Default options
     grunt.registerTask('stage1', ['clean', 'copy', 'favicons:stage1', 'nodeunit:stage1']);
     grunt.registerTask('stage2', ['clean', 'copy', 'favicons:stage2', 'nodeunit:stage2']);
-    grunt.registerTask('stage3', ['clean', 'copy:php', 'favicons:stage3', 'nodeunit:stage3']);
+    grunt.registerTask('stage3', ['clean', 'copy:php', 'copy:manifest', 'favicons:stage3', 'nodeunit:stage3']);
 
     grunt.registerTask('test', ['jshint', 'stage1', 'stage2', 'stage3', 'clean']);
     grunt.registerTask('default', ['test']);

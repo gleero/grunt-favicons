@@ -62,7 +62,8 @@ module.exports = function(grunt) {
             coast: false,
             tileBlackWhite: true,
             tileColor: "auto", // none, auto, #color
-            firefox: false
+            firefox: false,
+            firefoxManifest: ""
         });
 
         // Append all icons to HTML as meta tags (needs cheerio)
@@ -196,13 +197,36 @@ module.exports = function(grunt) {
                     grunt.log.ok();
                 }
 
-                // Firefox OS
+                // Firefox
                 if (options.firefox) {
-                    ['16x16', '30x30', '32x32', '48x48', '60x60', '64x64', '128x128', '256x256'].forEach(function(size) {
-                          grunt.log.write('firefox-icon-' + size + '.png... ');
-                          convert(combine(source, f.dest, size, "firefox-icon-" + size + ".png", []));
+                    var updateFirefoxManifest = (options.firefoxManifest !== undefined && options.firefoxManifest !== ''),
+                      contentFirefox;
+
+                    if (updateFirefoxManifest) {
+                        var contentsFirefox = (grunt.file.exists(options.firefoxManifest)) ? grunt.file.read(options.firefoxManifest) : '{}';
+                        contentFirefox = JSON.parse(contentsFirefox);
+                        contentFirefox.icons = {};
+                    }
+
+                    ['16', '30', '32', '48', '60', '64', '128', '256'].forEach(function(size) {
+                          var dimensions = size + 'x' + size;
+                          grunt.log.write('firefox-icon-' + dimensions + '.png... ');
+                          convert(combine(source, f.dest, dimensions, "firefox-icon-" + dimensions + ".png", []));
+
+                          if (updateFirefoxManifest) {
+                            contentFirefox.icons[size] = options.HTMLPrefix + 'firefox-icon' + dimensions + '.png';
+                          }
+
                           grunt.log.ok();
                     });
+
+                    if (updateFirefoxManifest) {
+                        grunt.log.write('Updating Firefox manifest... ');
+
+                        fs.writeFileSync(options.firefoxManifest, JSON.stringify(contentFirefox, null, 2));
+                    }
+
+                    grunt.log.ok();
                 }
 
                 ////// Windows 8 Tile

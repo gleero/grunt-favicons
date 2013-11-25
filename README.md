@@ -146,6 +146,12 @@ Default value: `false`
 
 Add icons for [Firefox OS](http://www.mozilla.org/de/firefox/os/) and Firefox on Android and Windows.
 
+#### options.firefoxManifest
+Type: `String`
+Default value: `''`
+
+Path to [Firefox manifest](https://developer.mozilla.org/en-US/Apps/Developing/Manifest) you want to add links to icons.
+
 ### Low resolution
 
 If you reduce the image to 16x16, it will blured. To avoid this, you can put near source image the prefixes. For example: source image called `logo.png`. If you put nearly `logo.16x16.png` then it will be used.
