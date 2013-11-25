@@ -14,7 +14,7 @@ Generates all known types and sizes icons from PNG image. Uses ImageMagick.
 - `apple-touch-icon-114x114.png` (114x114) — iPhone retina, iOS 6 and lower;
 - `apple-touch-icon-120x120.png` (120x120) — iPhone retina, iOS 7 and higher;
 - `apple-touch-icon-144x144.png` (144x144) — iPad retina;
-- `apple-touch-icon-144x144.png` (152x152) — iPad retina iOS 7;
+- `apple-touch-icon-152x152.png` (152x152) — iPad retina iOS 7;
 - `windows-tile-144x144.png` (144x144) — Windows 8 tile;
 - `coast-icon-228x228.png` (228x228) - Coast browser.
 
@@ -162,6 +162,7 @@ grunt.initConfig({
       trueColor: true,
       precomposed: true,
       appleTouchBackgroundColor: "#e2b2c2",
+      coast: true
       windowsTile: true,
       tileBlackWhite: false,
       tileColor: "auto",
