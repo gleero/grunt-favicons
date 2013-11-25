@@ -48,7 +48,7 @@ module.exports = function(grunt) {
     };
 
     // Tasks
-    grunt.registerMultiTask('favicons', 'Generate favicon.ico and icons for iOS, Android and WP8', function() {
+    grunt.registerMultiTask('favicons', 'Generate favicon.ico and icons for iOS, Android, WP8 and Firefox (OS)', function() {
 
         var target = this.target;
 
@@ -61,7 +61,8 @@ module.exports = function(grunt) {
             windowsTile: true,
             coast: false,
             tileBlackWhite: true,
-            tileColor: "auto" // none, auto, #color
+            tileColor: "auto", // none, auto, #color
+            firefox: false
         });
 
         // Append all icons to HTML as meta tags (needs cheerio)
@@ -193,6 +194,15 @@ module.exports = function(grunt) {
                     grunt.log.write('coast-icon-228x228.png... ');
                     convert(combine(source, f.dest, "228x228", "coast-icon-228x228.png", additionalOpts));
                     grunt.log.ok();
+                }
+
+                // Firefox OS
+                if (options.firefox) {
+                    ['16x16', '30x30', '32x32', '48x48', '60x60', '64x64', '128x128', '256x256'].forEach(function(size) {
+                          grunt.log.write('firefox-icon-' + size + '.png... ');
+                          convert(combine(source, f.dest, size, "firefox-icon-" + size + ".png", []));
+                          grunt.log.ok();
+                    });
                 }
 
                 ////// Windows 8 Tile

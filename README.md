@@ -17,6 +17,14 @@ Generates all known types and sizes icons from PNG image. Uses ImageMagick.
 - `apple-touch-icon-144x144.png` (152x152) — iPad retina iOS 7;
 - `windows-tile-144x144.png` (144x144) — Windows 8 tile;
 - `coast-icon-228x228.png` (228x228) - Coast browser.
+- `firefox-icon-16x16.png` (16x16) - Firefox on Android / Windows.
+- `firefox-icon-30x30.png` (30x30) - Firefox OS.
+- `firefox-icon-32x32.png` (32x32) - Firefox on Android / Windows.
+- `firefox-icon-48x48.png` (48x48) - Firefox on Android / Windows.
+- `firefox-icon-60x60.png` (60x60) - Firefox OS.
+- `firefox-icon-64x64.png` (64x64) - Firefox on Android / Windows.
+- `firefox-icon-128x128.png` (128x128) - Firefox on Android / Windows.
+- `firefox-icon-256x256.png` (256x256) - Firefox on Android / Windows.
 
 Adds changes to `html` file.
 
@@ -131,6 +139,12 @@ Default value: `auto`
 Values: `auto|none|#COLOR`
 
 Background color for Windows 8 tile. If option set to `auto` color is selected automatically. `none` leaves transparency.
+
+#### options.firefox
+Type: `Boolean`
+Default value: `false`
+
+Add icons for [Firefox OS](http://www.mozilla.org/de/firefox/os/) and Firefox on Android and Windows.
 
 ### Low resolution
 

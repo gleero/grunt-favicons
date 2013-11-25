@@ -1,6 +1,6 @@
 {
   "name": "grunt-favicons",
-  "description": "Generate favicon.ico and icons for iOS, Android, Windows 8 and Firefox OS",
+  "description": "Generate favicon.ico and icons for iOS, Android, Windows 8 and Firefox (OS)",
   "version": "0.3.2",
   "homepage": "https://github.com/gleero/grunt-favicons",
   "author": {
@@ -54,6 +54,7 @@
     "ios",
     "android",
     "wp8",
+    "firefox",
     "firefox os"
   ]
 }

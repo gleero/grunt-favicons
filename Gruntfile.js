@@ -42,7 +42,8 @@ module.exports = function(grunt) {
                     HTMLPrefix: "<?= SITE_TEMPLATE_PATH; ?>/icons/",
                     windowsTile: true,
                     tileColor: "none",
-                    coast: true
+                    coast: true,
+                    firefox: true
                 },
                 src: 'test/test.png',
                 dest: 'test/out'
