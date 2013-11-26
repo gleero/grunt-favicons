@@ -212,7 +212,7 @@ Big thanks to: [ro-ka](https://github.com/ro-ka), [debugwand](https://github.com
 
 ## Release History
 
-### 2013-10-26 v0.4
+### 2013-11-26 v0.4
 
 * Small bugfix;
 * [#4](https://github.com/gleero/grunt-favicons/pull/4) Supports php-tags in `HTMLPrefix`;
