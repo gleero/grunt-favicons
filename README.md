@@ -207,8 +207,17 @@ Website: [gleero.com](http://gleero.com/)
 
 E-mail: [gleero@gmail.com](mailto:gleero@gmail.com)
 
+Big thanks to: [ro-ka](https://github.com/ro-ka), [debugwand](https://github.com/debugwand) and [gausie](https://github.com/gausie) for contributing!
+
 
 ## Release History
+
+### 2013-10-26 v0.4
+
+* Small bugfix;
+* [#4](https://github.com/gleero/grunt-favicons/pull/4) Supports php-tags in `HTMLPrefix`;
+* [#5](https://github.com/gleero/grunt-favicons/pull/5) The task on startup removes all possible icons tags from `html`;
+* [#8](https://github.com/gleero/grunt-favicons/pull/8) Firefox OS and Firefox for Android and Windows.
 
 ### 2013-10-11 v0.3.2
 
