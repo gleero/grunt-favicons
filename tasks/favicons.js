@@ -48,7 +48,7 @@ module.exports = function(grunt) {
     };
 
     // Tasks
-    grunt.registerMultiTask('favicons', 'Generate favicon.ico and icons for iOS, Android and WP8', function() {
+    grunt.registerMultiTask('favicons', 'Generate favicon.ico and icons for iOS, Android, WP8 and Firefox (OS)', function() {
 
         var target = this.target;
 
@@ -61,7 +61,9 @@ module.exports = function(grunt) {
             windowsTile: true,
             coast: false,
             tileBlackWhite: true,
-            tileColor: "auto" // none, auto, #color
+            tileColor: "auto", // none, auto, #color
+            firefox: false,
+            firefoxManifest: ""
         });
 
         // Append all icons to HTML as meta tags (needs cheerio)
@@ -192,6 +194,38 @@ module.exports = function(grunt) {
                 if (options.coast) {
                     grunt.log.write('coast-icon-228x228.png... ');
                     convert(combine(source, f.dest, "228x228", "coast-icon-228x228.png", additionalOpts));
+                    grunt.log.ok();
+                }
+
+                // Firefox
+                if (options.firefox) {
+                    var updateFirefoxManifest = (options.firefoxManifest !== undefined && options.firefoxManifest !== ''),
+                      contentFirefox;
+
+                    if (updateFirefoxManifest) {
+                        var contentsFirefox = (grunt.file.exists(options.firefoxManifest)) ? grunt.file.read(options.firefoxManifest) : '{}';
+                        contentFirefox = JSON.parse(contentsFirefox);
+                        contentFirefox.icons = {};
+                    }
+
+                    ['16', '30', '32', '48', '60', '64', '128', '256'].forEach(function(size) {
+                          var dimensions = size + 'x' + size;
+                          grunt.log.write('firefox-icon-' + dimensions + '.png... ');
+                          convert(combine(source, f.dest, dimensions, "firefox-icon-" + dimensions + ".png", []));
+
+                          if (updateFirefoxManifest) {
+                            contentFirefox.icons[size] = options.HTMLPrefix + 'firefox-icon' + dimensions + '.png';
+                          }
+
+                          grunt.log.ok();
+                    });
+
+                    if (updateFirefoxManifest) {
+                        grunt.log.write('Updating Firefox manifest... ');
+
+                        fs.writeFileSync(options.firefoxManifest, JSON.stringify(contentFirefox, null, 2));
+                    }
+
                     grunt.log.ok();
                 }
 
