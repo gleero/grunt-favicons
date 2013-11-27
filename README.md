@@ -1,4 +1,6 @@
-# grunt-favicons [![Build Status](https://api.travis-ci.org/gleero/grunt-favicons.png?branch=master)](https://travis-ci.org/gleero/grunt-favicons)
+# grunt-favicons
+
+[![Build Status](https://api.travis-ci.org/gleero/grunt-favicons.png?branch=master)](https://travis-ci.org/gleero/grunt-favicons) [![NPM version](https://badge.fury.io/js/grunt-favicons.png)](http://badge.fury.io/js/grunt-favicons)
 
 Generates all known types and sizes icons from PNG image. Uses ImageMagick.
 
