@@ -184,7 +184,7 @@ grunt.initConfig({
       trueColor: true,
       precomposed: true,
       appleTouchBackgroundColor: "#e2b2c2",
-      coast: true
+      coast: true,
       windowsTile: true,
       tileBlackWhite: false,
       tileColor: "auto",
