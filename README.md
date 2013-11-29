@@ -18,14 +18,14 @@ Generates all known types and sizes icons from PNG image. Uses ImageMagick.
 - `apple-touch-icon-144x144.png` (144x144) — iPad retina;
 - `apple-touch-icon-152x152.png` (152x152) — iPad retina iOS 7;
 - `windows-tile-144x144.png` (144x144) — Windows 8 tile;
-- `coast-icon-228x228.png` (228x228) - Coast browser.
-- `firefox-icon-16x16.png` (16x16) - Firefox on Android / Windows.
-- `firefox-icon-30x30.png` (30x30) - Firefox OS.
-- `firefox-icon-32x32.png` (32x32) - Firefox on Android / Windows.
-- `firefox-icon-48x48.png` (48x48) - Firefox on Android / Windows.
-- `firefox-icon-60x60.png` (60x60) - Firefox OS.
-- `firefox-icon-64x64.png` (64x64) - Firefox on Android / Windows.
-- `firefox-icon-128x128.png` (128x128) - Firefox on Android / Windows.
+- `coast-icon-228x228.png` (228x228) - Coast browser;
+- `firefox-icon-16x16.png` (16x16) - Firefox on Android / Windows;
+- `firefox-icon-30x30.png` (30x30) - Firefox OS;
+- `firefox-icon-32x32.png` (32x32) - Firefox on Android / Windows;
+- `firefox-icon-48x48.png` (48x48) - Firefox on Android / Windows;
+- `firefox-icon-60x60.png` (60x60) - Firefox OS;
+- `firefox-icon-64x64.png` (64x64) - Firefox on Android / Windows;
+- `firefox-icon-128x128.png` (128x128) - Firefox on Android / Windows;
 - `firefox-icon-256x256.png` (256x256) - Firefox on Android / Windows.
 
 Adds changes to `html` file.
@@ -190,7 +190,7 @@ grunt.initConfig({
       trueColor: true,
       precomposed: true,
       appleTouchBackgroundColor: "#e2b2c2",
-      coast: true
+      coast: true,
       windowsTile: true,
       tileBlackWhite: false,
       tileColor: "auto",
@@ -220,7 +220,11 @@ Big thanks to: [ro-ka](https://github.com/ro-ka), [debugwand](https://github.com
 
 ## Release History
 
-### 2013-11-26 v0.4
+### 2013-11-30 v0.5.0
+
+* Add iOS icons padding.
+
+### 2013-11-26 v0.4.0
 
 * Small bugfix;
 * [#4](https://github.com/gleero/grunt-favicons/pull/4) Supports php-tags in `HTMLPrefix`;
