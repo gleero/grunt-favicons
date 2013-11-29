@@ -114,6 +114,12 @@ iOS icon can't be transparent. It needs background. If option set to `auto` colo
 
 ![options.appleTouchBackgroundColor](http://gleero.com/pictures/diffapple.png)
 
+#### options.appleTouchPadding
+Type: `Integer`
+Default value: `15`
+
+Padding in iOS icons. In percents.
+
 #### options.windowsTile
 Type: `Boolean`
 Default value: `true`

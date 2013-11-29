@@ -32,6 +32,7 @@ module.exports = function(grunt) {
                     HTMLPrefix: "/images/icons/",
                     windowsTile: false,
                     precomposed: false,
+                    appleTouchBackgroundColor: "#a0b4bb",
                     firefox: true,
                     firefoxManifest: 'test/out/manifest.webapp'
                 },
@@ -43,6 +44,7 @@ module.exports = function(grunt) {
                     html: 'test/out/test.php',
                     HTMLPrefix: "<?= SITE_TEMPLATE_PATH; ?>/icons/",
                     windowsTile: true,
+                    appleTouchPadding: 25,
                     tileColor: "none",
                     coast: true
                 },
