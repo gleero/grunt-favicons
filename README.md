@@ -255,3 +255,5 @@ Big thanks to: [ro-ka](https://github.com/ro-ka), [debugwand](https://github.com
 * Add source image prefix;
 * 228х228 Coast browser support;
 * Readme.md fix.
+
+[![githalytics.com alpha](https://cruel-carlota.pagodabox.com/684cec4cbc7b0a8d07a3d3b3a2098811 "githalytics.com")](http://githalytics.com/gleero/grunt-favicons)
