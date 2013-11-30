@@ -33,6 +33,7 @@ module.exports = function(grunt) {
                     windowsTile: false,
                     precomposed: false,
                     appleTouchBackgroundColor: "#a0b4bb",
+                    appleTouchPadding: 25,
                     firefox: true,
                     firefoxManifest: 'test/out/manifest.webapp'
                 },
@@ -44,11 +45,13 @@ module.exports = function(grunt) {
                     html: 'test/out/test.php',
                     HTMLPrefix: "<?= SITE_TEMPLATE_PATH; ?>/icons/",
                     windowsTile: true,
-                    appleTouchPadding: 25,
+                    appleTouchPadding: 0,
                     tileColor: "none",
+                    firefox: true,
+                    firefoxRound: true,
                     coast: true
                 },
-                src: 'test/test.png',
+                src: 'test/img.jpg',
                 dest: 'test/out'
             }
         },
@@ -88,7 +91,7 @@ module.exports = function(grunt) {
     grunt.registerTask('stage2', ['clean', 'copy', 'favicons:stage2', 'nodeunit:stage2']);
     grunt.registerTask('stage3', ['clean', 'copy:php', 'copy:manifest', 'favicons:stage3', 'nodeunit:stage3']);
 
-    grunt.registerTask('test', ['jshint', 'stage1', 'stage2', 'stage3', 'clean']);
+    grunt.registerTask('test', ['jshint', 'stage1', 'stage2', 'stage3', "clean"]);
     grunt.registerTask('default', ['test']);
 
 };

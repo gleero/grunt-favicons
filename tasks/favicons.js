@@ -77,6 +77,7 @@ module.exports = function(grunt) {
             tileBlackWhite: true,
             tileColor: "auto", // none, auto, #color
             firefox: false,
+            firefoxRound: false,
             firefoxManifest: ""
         });
 
@@ -223,15 +224,21 @@ module.exports = function(grunt) {
                     }
 
                     ['16', '30', '32', '48', '60', '64', '128', '256'].forEach(function(size) {
-                          var dimensions = size + 'x' + size;
-                          grunt.log.write('firefox-icon-' + dimensions + '.png... ');
-                          convert(combine(source, f.dest, dimensions, "firefox-icon-" + dimensions + ".png", []));
+                        var dimensions = size + 'x' + size;
+                        var dhalf = "circle "+size/2+","+size/2+" "+size/2+",1";
+                        var fifname = "firefox-icon-" + dimensions + ".png";
+                        grunt.log.write(fifname + '... ');
+                        convert(combine(source, f.dest, dimensions, fifname, []));
 
-                          if (updateFirefoxManifest) {
+                        if (options.firefoxRound) {
+                            convert(["-size", dimensions, "xc:none", "-fill", path.join(f.dest, fifname), "-draw", '"'+dhalf+'"', path.join(f.dest, fifname)]);
+                        }
+
+                        if (updateFirefoxManifest) {
                             contentFirefox.icons[size] = options.HTMLPrefix + 'firefox-icon' + dimensions + '.png';
-                          }
+                        }
 
-                          grunt.log.ok();
+                        grunt.log.ok();
                     });
 
                     if (updateFirefoxManifest) {
