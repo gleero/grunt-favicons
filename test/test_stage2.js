@@ -267,7 +267,7 @@ exports.favicons = {
     manifestsum: function(test) {
         test.expect(1);
         var original = crypto.createHash('sha1').update(grunt.file.read(path + '/manifest.webapp')).digest('hex');
-        test.ok(original === '3d66ae4293edb4efba5dd85869d23f8260c30c67', 'firefox manifest hashsum not valid');
+        test.ok(original === 'e4bbb42a563f9b32f565817d8f3cdbe4d6518eb3', 'firefox manifest hashsum not valid');
         test.done();
     },
 
