@@ -13,7 +13,7 @@ exports.favicons = {
     icoExists: function(test) {
         test.expect(1);
         var exists = fs.existsSync(path + "/favicon.ico");
-        test.ok(exists, 'favicon.ico is not exists.');
+        test.ok(exists, 'favicon.ico does not exist.');
         test.done();
     },
 
@@ -29,7 +29,7 @@ exports.favicons = {
     pngExists: function(test) {
         test.expect(1);
         var exists = fs.existsSync(path + "/favicon.png");
-        test.ok(exists, 'favicon.png is not exists.');
+        test.ok(exists, 'favicon.png does not exist.');
         test.done();
     },
 
@@ -46,7 +46,7 @@ exports.favicons = {
     atiExists: function(test) {
         test.expect(1);
         var exists = fs.existsSync(path + "/apple-touch-icon.png");
-        test.ok(exists, 'apple-touch-icon.png is not exists.');
+        test.ok(exists, 'apple-touch-icon.png does not exist.');
         test.done();
     },
 
@@ -63,7 +63,7 @@ exports.favicons = {
     ati72Exists: function(test) {
         test.expect(1);
         var exists = fs.existsSync(path + "/apple-touch-icon-72x72.png");
-        test.ok(exists, 'apple-touch-icon-72x72.png is not exists.');
+        test.ok(exists, 'apple-touch-icon-72x72.png does not exist.');
         test.done();
     },
 
@@ -80,7 +80,7 @@ exports.favicons = {
     ati114Exists: function(test) {
         test.expect(1);
         var exists = fs.existsSync(path + "/apple-touch-icon-114x114.png");
-        test.ok(exists, 'apple-touch-icon-114x114.png is not exists.');
+        test.ok(exists, 'apple-touch-icon-114x114.png does not exist.');
         test.done();
     },
 
@@ -97,7 +97,7 @@ exports.favicons = {
     ati120Exists: function(test) {
         test.expect(1);
         var exists = fs.existsSync(path + "/apple-touch-icon-120x120-precomposed.png");
-        test.ok(exists, 'apple-touch-icon-120x120-precomposed.png is not exists.');
+        test.ok(exists, 'apple-touch-icon-120x120-precomposed.png does not exist.');
         test.done();
     },
 
@@ -114,7 +114,7 @@ exports.favicons = {
     ati144Exists: function(test) {
         test.expect(1);
         var exists = fs.existsSync(path + "/apple-touch-icon-144x144.png");
-        test.ok(exists, 'apple-touch-icon-144x144.png is not exists.');
+        test.ok(exists, 'apple-touch-icon-144x144.png does not exist.');
         test.done();
     },
 
@@ -131,7 +131,7 @@ exports.favicons = {
     fx16Exists: function(test) {
         test.expect(1);
         var exists = fs.existsSync(path + "/firefox-icon-16x16.png");
-        test.ok(exists, 'firefox-icon-16x16.png is not exists.');
+        test.ok(exists, 'firefox-icon-16x16.png does not exist.');
         test.done();
     },
 
@@ -148,7 +148,7 @@ exports.favicons = {
     fx30Exists: function(test) {
         test.expect(1);
         var exists = fs.existsSync(path + "/firefox-icon-30x30.png");
-        test.ok(exists, 'firefox-icon-30x30.png is not exists.');
+        test.ok(exists, 'firefox-icon-30x30.png does not exist.');
         test.done();
     },
 
@@ -165,7 +165,7 @@ exports.favicons = {
     fx32Exists: function(test) {
         test.expect(1);
         var exists = fs.existsSync(path + "/firefox-icon-32x32.png");
-        test.ok(exists, 'firefox-icon-32x32.png is not exists.');
+        test.ok(exists, 'firefox-icon-32x32.png does not exist.');
         test.done();
     },
 
@@ -182,7 +182,7 @@ exports.favicons = {
     fx48Exists: function(test) {
         test.expect(1);
         var exists = fs.existsSync(path + "/firefox-icon-48x48.png");
-        test.ok(exists, 'firefox-icon-48x48.png is not exists.');
+        test.ok(exists, 'firefox-icon-48x48.png does not exist.');
         test.done();
     },
 
@@ -199,7 +199,7 @@ exports.favicons = {
     fx60Exists: function(test) {
         test.expect(1);
         var exists = fs.existsSync(path + "/firefox-icon-60x60.png");
-        test.ok(exists, 'firefox-icon-60x60.png is not exists.');
+        test.ok(exists, 'firefox-icon-60x60.png does not exist.');
         test.done();
     },
 
@@ -216,7 +216,7 @@ exports.favicons = {
     fx64Exists: function(test) {
         test.expect(1);
         var exists = fs.existsSync(path + "/firefox-icon-64x64.png");
-        test.ok(exists, 'firefox-icon-64x64.png is not exists.');
+        test.ok(exists, 'firefox-icon-64x64.png does not exist.');
         test.done();
     },
 
@@ -233,7 +233,7 @@ exports.favicons = {
     fx128Exists: function(test) {
         test.expect(1);
         var exists = fs.existsSync(path + "/firefox-icon-128x128.png");
-        test.ok(exists, 'firefox-icon-128x128.png is not exists.');
+        test.ok(exists, 'firefox-icon-128x128.png does not exist.');
         test.done();
     },
 
@@ -250,7 +250,7 @@ exports.favicons = {
     fx256Exists: function(test) {
         test.expect(1);
         var exists = fs.existsSync(path + "/firefox-icon-256x256.png");
-        test.ok(exists, 'firefox-icon-256x256.png is not exists.');
+        test.ok(exists, 'firefox-icon-256x256.png does not exist.');
         test.done();
     },
 
@@ -267,7 +267,7 @@ exports.favicons = {
     manifestsum: function(test) {
         test.expect(1);
         var original = crypto.createHash('sha1').update(grunt.file.read(path + '/manifest.webapp')).digest('hex');
-        test.ok(original === '3d66ae4293edb4efba5dd85869d23f8260c30c67', 'firefox manifest hashsum not valid');
+        test.ok(original === 'e4bbb42a563f9b32f565817d8f3cdbe4d6518eb3', 'firefox manifest hashsum not valid');
         test.done();
     },
 

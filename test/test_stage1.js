@@ -12,7 +12,7 @@ exports.favicons = {
     icoExists: function(test) {
         test.expect(1);
         var exists = fs.existsSync(path + "/favicon.ico");
-        test.ok(exists, 'favicon.ico is not exists.');
+        test.ok(exists, 'favicon.ico does not exist.');
         test.done();
     },
 
@@ -28,7 +28,7 @@ exports.favicons = {
     pngExists: function(test) {
         test.expect(1);
         var exists = fs.existsSync(path + "/favicon.png");
-        test.ok(exists, 'favicon.png is not exists.');
+        test.ok(exists, 'favicon.png does not exist.');
         test.done();
     },
 
@@ -45,7 +45,7 @@ exports.favicons = {
     atiExists: function(test) {
         test.expect(1);
         var exists = fs.existsSync(path + "/apple-touch-icon.png");
-        test.ok(exists, 'apple-touch-icon.png is not exists.');
+        test.ok(exists, 'apple-touch-icon.png does not exist.');
         test.done();
     },
 
@@ -62,7 +62,7 @@ exports.favicons = {
     atipExists: function(test) {
         test.expect(1);
         var exists = fs.existsSync(path + "/apple-touch-icon-precomposed.png");
-        test.ok(exists, 'apple-touch-icon-precomposed.png is not exists.');
+        test.ok(exists, 'apple-touch-icon-precomposed.png does not exist.');
         test.done();
     },
 
@@ -79,7 +79,7 @@ exports.favicons = {
     atip72Exists: function(test) {
         test.expect(1);
         var exists = fs.existsSync(path + "/apple-touch-icon-72x72-precomposed.png");
-        test.ok(exists, 'apple-touch-icon-72x72-precomposed.png is not exists.');
+        test.ok(exists, 'apple-touch-icon-72x72-precomposed.png does not exist.');
         test.done();
     },
 
@@ -96,7 +96,7 @@ exports.favicons = {
     atip114Exists: function(test) {
         test.expect(1);
         var exists = fs.existsSync(path + "/apple-touch-icon-114x114-precomposed.png");
-        test.ok(exists, 'apple-touch-icon-114x114-precomposed.png is not exists.');
+        test.ok(exists, 'apple-touch-icon-114x114-precomposed.png does not exist.');
         test.done();
     },
 
@@ -113,7 +113,7 @@ exports.favicons = {
     atip120Exists: function(test) {
         test.expect(1);
         var exists = fs.existsSync(path + "/apple-touch-icon-120x120-precomposed.png");
-        test.ok(exists, 'apple-touch-icon-120x120-precomposed.png is not exists.');
+        test.ok(exists, 'apple-touch-icon-120x120-precomposed.png does not exist.');
         test.done();
     },
 
@@ -130,7 +130,7 @@ exports.favicons = {
     atip144Exists: function(test) {
         test.expect(1);
         var exists = fs.existsSync(path + "/apple-touch-icon-144x144-precomposed.png");
-        test.ok(exists, 'apple-touch-icon-144x144-precomposed.png is not exists.');
+        test.ok(exists, 'apple-touch-icon-144x144-precomposed.png does not exist.');
         test.done();
     },
 
@@ -147,7 +147,7 @@ exports.favicons = {
     wt144Exists: function(test) {
         test.expect(1);
         var exists = fs.existsSync(path + "/windows-tile-144x144.png");
-        test.ok(exists, 'windows-tile-144x144.png is not exists.');
+        test.ok(exists, 'windows-tile-144x144.png does not exist.');
         test.done();
     },
 

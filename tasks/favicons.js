@@ -235,7 +235,7 @@ module.exports = function(grunt) {
                         }
 
                         if (updateFirefoxManifest) {
-                            contentFirefox.icons[size] = options.HTMLPrefix + 'firefox-icon' + dimensions + '.png';
+                            contentFirefox.icons[size] = options.HTMLPrefix + fifname;
                         }
 
                         grunt.log.ok();

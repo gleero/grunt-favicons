@@ -13,7 +13,7 @@ exports.favicons = {
     wt144Exists: function(test) {
         test.expect(1);
         var exists = fs.existsSync(path + "/windows-tile-144x144.png");
-        test.ok(exists, 'windows-tile-144x144.png is not exists.');
+        test.ok(exists, 'windows-tile-144x144.png does not exist.');
         test.done();
     },
 
@@ -30,7 +30,7 @@ exports.favicons = {
     ci228Exists: function(test) {
         test.expect(1);
         var exists = fs.existsSync(path + "/coast-icon-228x228.png");
-        test.ok(exists, 'coast-icon-228x228.png is not exists.');
+        test.ok(exists, 'coast-icon-228x228.png does not exist.');
         test.done();
     },
 
