@@ -229,6 +229,10 @@ Big thanks to: [ro-ka](https://github.com/ro-ka), [debugwand](https://github.com
 
 ## Release History
 
+### 2013-12-11 v0.5.1
+
+* Small bugfix ([#12](https://github.com/gleero/grunt-favicons/pull/12), [#13](https://github.com/gleero/grunt-favicons/pull/13)).
+
 ### 2013-11-30 v0.5.0
 
 * Add iOS icons padding;
