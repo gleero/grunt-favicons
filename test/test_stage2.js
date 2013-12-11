@@ -229,6 +229,23 @@ exports.favicons = {
         test.done();
     },
 
+    // firefox-icon-90x90.png exists
+    fx90Exists: function(test) {
+        test.expect(1);
+        var exists = fs.existsSync(path + "/firefox-icon-90x90.png");
+        test.ok(exists, 'firefox-icon-90x90.png does not exist.');
+        test.done();
+    },
+
+    // firefox-icon-90x90.png dimensions
+    fx90Dim: function(test) {
+        test.expect(1);
+        var dimensions = sizeOf(path + "/firefox-icon-90x90.png");
+        var pass = dimensions.width === 90 && dimensions.height === 90;
+        test.ok(pass, 'firefox-icon-90x90.png is not 90x90.');
+        test.done();
+    },
+
     // firefox-icon-128x128.png exists
     fx128Exists: function(test) {
         test.expect(1);
@@ -267,7 +284,7 @@ exports.favicons = {
     manifestsum: function(test) {
         test.expect(1);
         var original = crypto.createHash('sha1').update(grunt.file.read(path + '/manifest.webapp')).digest('hex');
-        test.ok(original === 'e4bbb42a563f9b32f565817d8f3cdbe4d6518eb3', 'firefox manifest hashsum not valid');
+        test.ok(original === '3b515fc36857866b8713c9b6958d167959d94159', 'firefox manifest hashsum not valid');
         test.done();
     },
 
