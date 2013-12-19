@@ -231,7 +231,7 @@ Big thanks to: [ro-ka](https://github.com/ro-ka), [debugwand](https://github.com
 
 ## Release History
 
-### 2013-12-19 v0.6
+### 2013-12-19 v0.6.0
 
 * [#14](https://github.com/gleero/grunt-favicons/pull/14) Add Firefox icon 120x120;
 * [#17](https://github.com/gleero/grunt-favicons/issues/17) Append 70x70, 150x150 and 310x310 for MS tiles;
@@ -239,7 +239,7 @@ Big thanks to: [ro-ka](https://github.com/ro-ka), [debugwand](https://github.com
 * HTML link sizes order;
 * All Apple touch icons contain;
 * Linebreaks in HTML;
-* [#16](https://github.com/gleero/grunt-favicons/issues/16), [#16](https://github.com/gleero/grunt-favicons/issues/15).
+* [#16](https://github.com/gleero/grunt-favicons/issues/16), [#15](https://github.com/gleero/grunt-favicons/issues/15).
 
 ### 2013-12-11 v0.5.1
 
