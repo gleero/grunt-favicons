@@ -11,6 +11,7 @@ Generates all known types and sizes icons from PNG image. Uses ImageMagick.
 - `favicon.ico` (16x16, 32x32, 48x48) — desktop browsers, address bar, tabs, safari reading list, non-retina iPhone, windows 7+ taskbar, windows desktop;
 - `favicon.png` (64x64) — modern browsers;
 - `apple-touch-icon.png` (57x57) — iPhone non-retina, Android 2.1+;
+- `apple-touch-icon-60x60.png` (60x60) — iPhone iOS7+;
 - `apple-touch-icon-72x72.png` (72x72) — iPad non-retina;
 - `apple-touch-icon-76x76.png` (76x76) — iPad non-retina iOS 7;
 - `apple-touch-icon-114x114.png` (114x114) — iPhone retina, iOS 6 and lower;
@@ -229,6 +230,16 @@ Big thanks to: [ro-ka](https://github.com/ro-ka), [debugwand](https://github.com
 
 
 ## Release History
+
+### 2013-12-19 v0.6
+
+* [#14](https://github.com/gleero/grunt-favicons/pull/14) Add Firefox icon 120x120;
+* [#17](https://github.com/gleero/grunt-favicons/issues/17) Append 70x70, 150x150 and 310x310 for MS tiles;
+* Append Apple touch icon 60x60 for iOS 7;
+* HTML link sizes order;
+* All Apple touch icons contain;
+* Linebreaks in HTML;
+* [#16](https://github.com/gleero/grunt-favicons/issues/16), [#16](https://github.com/gleero/grunt-favicons/issues/15).
 
 ### 2013-12-11 v0.5.1
 

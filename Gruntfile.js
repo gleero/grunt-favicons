@@ -35,6 +35,7 @@ module.exports = function(grunt) {
                     appleTouchBackgroundColor: "#a0b4bb",
                     appleTouchPadding: 25,
                     firefox: true,
+                    debug: true,
                     firefoxManifest: 'test/out/manifest.webapp'
                 },
                 src: 'test/test.png',

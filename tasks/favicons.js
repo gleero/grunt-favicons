@@ -12,54 +12,6 @@ var execSync = require("execSync");
 
 module.exports = function(grunt) {
 
-    "use strict";
-
-    // Convert image with imagemagick
-    var convert = function(args) {
-        args.unshift("convert");
-        console.log(args.join(" "));
-        var ret = execSync.exec(args.join(" "));
-        if (ret.code === 127) {
-            return grunt.warn(
-                'You need to have ImageMagick installed in your PATH for this task to work.'
-            );
-        }
-    };
-
-    // Generate background color for apple touch icons
-    var generateColor = function(src) {
-        var ret = execSync.exec("convert " + src + " -polaroid 180 -resize 1x1 -colors 1 -alpha off -unique-colors txt:- | grep -v ImageMagick | sed -n 's/.*\\(#[0-9A-F]*\\).*/\\1/p'");
-        return ret.stdout.trim();
-    };
-
-    // Generate background color for windows 8 tile
-    var generateTileColor = function(src) {
-        var ret = execSync.exec("convert " + src + " +dither -colors 1 -alpha off -unique-colors txt:- | grep -v ImageMagick | sed -n 's/.*\\(#[0-9A-F]*\\).*/\\1/p'");
-        return ret.stdout.trim();
-    };
-
-    var combine = function(src, dest, size, fname, additionalOpts, padding) {
-        var out = [
-            src,
-            "-resize",
-            size
-        ].concat(additionalOpts);
-        // icon padding
-        if (typeof(padding)==='number' && padding >= 0 && padding < 100) {
-            var thumb = Math.round((100 - padding) * parseInt(size.split("x")[0], 10) / 100);
-            out = out.concat([
-                "-gravity",
-                "center",
-                "-thumbnail",
-                "\"" + thumb + "x" + thumb + ">" + "\"",
-                "-extent",
-                size
-            ]);
-        }
-        out.push(path.join(dest, fname));
-        return out;
-    };
-
     // Tasks
     grunt.registerMultiTask('favicons', 'Generate favicon.ico and icons for iOS, Android, WP8 and Firefox (OS)', function() {
 
@@ -67,6 +19,7 @@ module.exports = function(grunt) {
 
         // Default options
         var options = this.options({
+            debug: false,
             trueColor: false,
             precomposed: true,
             HTMLPrefix: "",
@@ -80,6 +33,61 @@ module.exports = function(grunt) {
             firefoxRound: false,
             firefoxManifest: ""
         });
+
+        // Execute external command
+        var execute = function(cmd) {
+            if (options.debug) {
+                console.log("\n\033[37m" + cmd + "\033[0m");
+            }
+            return execSync.exec(cmd);
+        };
+
+        // Convert image with imagemagick
+        var convert = function(args) {
+            args.unshift("convert");
+            var ret = execute(args.join(" "));
+            if (ret.code === 127) {
+                return grunt.warn(
+                    'You need to have ImageMagick installed in your PATH for this task to work.'
+                );
+            }
+        };
+
+        // Generate background color for apple touch icons
+        var generateColor = function(src) {
+            var ret = execute("convert " + src + " -polaroid 180 -resize 1x1 -colors 1 -alpha off -unique-colors txt:- | grep -v ImageMagick | sed -n 's/.*\\(#[0-9A-F]*\\).*/\\1/p'");
+            return ret.stdout.trim();
+        };
+
+        // Generate background color for windows 8 tile
+        var generateTileColor = function(src) {
+            var ret = execute("convert " + src + " +dither -colors 1 -alpha off -unique-colors txt:- | grep -v ImageMagick | sed -n 's/.*\\(#[0-9A-F]*\\).*/\\1/p'");
+            return ret.stdout.trim();
+        };
+
+        var combine = function(src, dest, size, fname, additionalOpts, padding) {
+            var out = [
+                src,
+                "-resize",
+                size
+            ].concat(additionalOpts);
+            // icon padding
+            if (typeof(padding)==='number' && padding >= 0 && padding < 100) {
+                var thumb = Math.round((100 - padding) * parseInt(size.split("x")[0], 10) / 100);
+                out = out.concat([
+                    "-gravity",
+                    "center",
+                    "-thumbnail",
+                    "\"" + thumb + "x" + thumb + ">" + "\"",
+                    "-extent",
+                    size
+                ]);
+            }
+            out.push(path.join(dest, fname));
+            return out;
+        };
+
+
 
         // Append all icons to HTML as meta tags (needs cheerio)
         var needHTML = options.html !== undefined && options.html !== "";
@@ -175,6 +183,11 @@ module.exports = function(grunt) {
                     grunt.log.ok();
                 }
 
+                // 60x60: iPhone iOS 7 without size
+                grunt.log.write('apple-touch-icon-60x60-precomposed.png... ');
+                convert(combine(source, f.dest, "60x60", "apple-touch-icon-60x60-precomposed.png", additionalOpts, options.appleTouchPadding));
+                grunt.log.ok();
+
                 // 72x72: iPad non-retina, iOS 6 and lower
                 grunt.log.write('apple-touch-icon-72x72' + prefix + '.png... ');
                 convert(combine(source, f.dest, "72x72", "apple-touch-icon-72x72" + prefix + ".png", additionalOpts, options.appleTouchPadding));
@@ -205,7 +218,7 @@ module.exports = function(grunt) {
                 convert(combine(source, f.dest, "152x152", "apple-touch-icon-152x152-precomposed.png", additionalOpts, options.appleTouchPadding));
                 grunt.log.ok();
 
-                // 228х228: Coast
+                // 228x228: Coast
                 if (options.coast) {
                     grunt.log.write('coast-icon-228x228.png... ');
                     convert(combine(source, f.dest, "228x228", "coast-icon-228x228.png", additionalOpts));
@@ -256,7 +269,7 @@ module.exports = function(grunt) {
 
                     grunt.log.write('windows-tile-144x144.png... ');
 
-                    // Tile white icon 144x144
+                    // MS Tiles
 
                     if (options.tileBlackWhite) {
                         additionalOpts = [
@@ -290,7 +303,10 @@ module.exports = function(grunt) {
                         }
                     }
 
+                    convert(combine(source, f.dest, "70x70", "windows-tile-70x70.png", additionalOpts));
                     convert(combine(source, f.dest, "144x144", "windows-tile-144x144.png", additionalOpts));
+                    convert(combine(source, f.dest, "150x150", "windows-tile-150x150.png", additionalOpts));
+                    convert(combine(source, f.dest, "310x310", "windows-tile-310x310.png", additionalOpts));
                     grunt.log.ok();
 
                 }
@@ -299,26 +315,40 @@ module.exports = function(grunt) {
                 if (needHTML) {
                     grunt.log.write('Updating HTML... ');
                     var elements = "";
-                    elements += "<link rel=\"shortcut icon\" href=\"" + options.HTMLPrefix + "favicon.ico\" />";
-                    elements += "<link rel=\"icon\" type=\"image/png\" sizes=\"64x64\" href=\"" + options.HTMLPrefix + "favicon.png\" />";
-                    if (options.coast) {
-                      elements += "<link rel=\"icon\" sizes=\"228x228\" href=\"" + options.HTMLPrefix + "coast-icon-228x228.png\" />";
-                    }
-                    elements += "<link rel=\"apple-touch-icon\" href=\"" + options.HTMLPrefix + "apple-touch-icon.png\">";
-                    elements += "<link rel=\"apple-touch-icon" + prefix + "\" href=\"" + options.HTMLPrefix + "apple-touch-icon" + prefix + ".png\">";
-                    elements += "<link rel=\"apple-touch-icon" + prefix + "\" sizes=\"72x72\" href=\"" + options.HTMLPrefix + "apple-touch-icon-72x72" + prefix + ".png\">";
-                    elements += "<link rel=\"apple-touch-icon-precomposed\" sizes=\"76x76\" href=\"" + options.HTMLPrefix + "apple-touch-icon-76x76-precomposed.png\">";
-                    elements += "<link rel=\"apple-touch-icon" + prefix + "\" sizes=\"114x114\" href=\"" + options.HTMLPrefix + "apple-touch-icon-114x114" + prefix + ".png\">";
-                    elements += "<link rel=\"apple-touch-icon-precomposed\" sizes=\"120x120\" href=\"" + options.HTMLPrefix + "apple-touch-icon-120x120-precomposed.png\">";
-                    elements += "<link rel=\"apple-touch-icon" + prefix + "\" sizes=\"144x144\" href=\"" + options.HTMLPrefix + "apple-touch-icon-144x144" + prefix + ".png\">";
-                    elements += "<link rel=\"apple-touch-icon-precomposed\" sizes=\"152x152\" href=\"" + options.HTMLPrefix + "apple-touch-icon-152x152-precomposed.png\">";
-                    // Windows 8 tile. In HTML version background color will be as meta-tag
+
                     if (options.windowsTile) {
-                        elements += "<meta name=\"msapplication-TileImage\" content=\"" + options.HTMLPrefix + "windows-tile-144x144.png\"/>";
+                        elements += "\t<meta name=\"msapplication-square70x70logo\" content=\"" + options.HTMLPrefix + "windows-tile-70x70.png\"/>\n";
+                        elements += "\t<meta name=\"msapplication-square150x150logo\" content=\"" + options.HTMLPrefix + "windows-tile-150x150.png\"/>\n";
+                        elements += "\t<meta name=\"msapplication-square310x310logo\" content=\"" + options.HTMLPrefix + "windows-tile-310x310.png\"/>\n";
+                        elements += "\t<meta name=\"msapplication-TileImage\" content=\"" + options.HTMLPrefix + "windows-tile-144x144.png\"/>\n";
                         if (options.tileColor !== "none") {
-                            elements += "<meta name=\"msapplication-TileColor\" content=\"" + options.tileColor + "\"/>";
+                            elements += "\t<meta name=\"msapplication-TileColor\" content=\"" + options.tileColor + "\"/>\n";
                         }
                     }
+
+                    // iOS
+                    elements += "\t<link rel=\"apple-touch-icon-precomposed\" sizes=\"152x152\" href=\"" + options.HTMLPrefix + "apple-touch-icon-152x152-precomposed.png\">\n";
+                    elements += "\t<link rel=\"apple-touch-icon-precomposed\" sizes=\"120x120\" href=\"" + options.HTMLPrefix + "apple-touch-icon-120x120-precomposed.png\">\n";
+
+                    elements += "\t<link rel=\"apple-touch-icon-precomposed\" sizes=\"76x76\" href=\"" + options.HTMLPrefix + "apple-touch-icon-76x76-precomposed.png\">\n";
+                    elements += "\t<link rel=\"apple-touch-icon-precomposed\" sizes=\"60x60\" href=\"" + options.HTMLPrefix + "apple-touch-icon-60x60-precomposed.png\">\n";
+
+                    elements += "\t<link rel=\"apple-touch-icon" + prefix + "\" sizes=\"144x144\" href=\"" + options.HTMLPrefix + "apple-touch-icon-144x144" + prefix + ".png\">\n";
+                    elements += "\t<link rel=\"apple-touch-icon" + prefix + "\" sizes=\"114x114\" href=\"" + options.HTMLPrefix + "apple-touch-icon-114x114" + prefix + ".png\">\n";
+
+                    elements += "\t<link rel=\"apple-touch-icon" + prefix + "\" sizes=\"72x72\" href=\"" + options.HTMLPrefix + "apple-touch-icon-72x72" + prefix + ".png\">\n";
+                    elements += "\t<link rel=\"apple-touch-icon\" sizes=\"57x57\" href=\"" + options.HTMLPrefix + "apple-touch-icon.png\">\n";
+
+                    // Coast browser
+                    if (options.coast) {
+                      elements += "\t<link rel=\"icon\" sizes=\"228x228\" href=\"" + options.HTMLPrefix + "coast-icon-228x228.png\" />\n";
+                    }
+
+                    // Default
+                    elements += "\t<link rel=\"shortcut icon\" href=\"" + options.HTMLPrefix + "favicon.ico\" />\n";
+                    elements += "\t<link rel=\"icon\" type=\"image/png\" sizes=\"64x64\" href=\"" + options.HTMLPrefix + "favicon.png\" />\n";
+
+                    // Windows 8 tile. In HTML version background color will be as meta-tag
 
                     if($('*').length > 0) {
                       $("head").append(elements);
