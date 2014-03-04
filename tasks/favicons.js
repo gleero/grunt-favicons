@@ -101,9 +101,17 @@ module.exports = function(grunt) {
             $('link[rel="icon"]').remove();
             $('link[rel="apple-touch-icon"]').remove();
             $('link[rel="apple-touch-icon-precomposed"]').remove();
-            if (options.windowsTile) {
-                $('meta[name="msapplication-TileImage"]').remove();
-                $('meta[name="msapplication-TileColor"]').remove();
+            $('meta').each(function(i, elem) {
+                var name = $(this).attr('name');
+                if(name && (name === 'msapplication-TileImage' || 
+                            name === 'msapplication-TileColor' || 
+                            name.indexOf('msapplication-square') >= 0)) {
+                    $(this).remove();
+                }
+            });
+            var html = $.html().replace(/(?:(?:^|\n)\s+|\s+(?:$|\n))/g,'').replace(/\s+/g,' ');
+            if(html === '') {
+                $ = cheerio.load('');
             }
         }
 
@@ -350,7 +358,7 @@ module.exports = function(grunt) {
 
                     // Windows 8 tile. In HTML version background color will be as meta-tag
 
-                    if($('*').length > 0) {
+                    if($('head').length > 0) {
                       $("head").append(elements);
                     } else {
                       $.root().append(elements);
