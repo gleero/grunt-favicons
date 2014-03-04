@@ -54,6 +54,21 @@ module.exports = function(grunt) {
                 },
                 src: 'test/img.jpg',
                 dest: 'test/out'
+            },
+            stage4: {
+                options: {
+                    html: 'test/out/test.html.twig',
+                    HTMLPrefix: '{{ releaseDir }}/icons/',
+                    trueColor: true,
+                    precomposed: true,
+                    appleTouchBackgroundColor: "#a0b4bb",
+                    coast: true,
+                    windowsTile: true,
+                    tileBlackWhite: false,
+                    tileColor: 'auto'
+                },
+                src: 'test/img.jpg',
+                dest: 'test/out'
             }
         },
 
@@ -75,7 +90,8 @@ module.exports = function(grunt) {
         nodeunit: {
             stage1: ['test/test_stage1.js'],
             stage2: ['test/test_stage2.js'],
-            stage3: ['test/test_stage3.js']
+            stage3: ['test/test_stage3.js'],
+            stage4: ['test/test_stage4.js']
         },
 
         clean: ['test/out']
@@ -91,6 +107,7 @@ module.exports = function(grunt) {
     grunt.registerTask('stage1', ['clean', 'copy', 'favicons:stage1', 'nodeunit:stage1']);
     grunt.registerTask('stage2', ['clean', 'copy', 'favicons:stage2', 'nodeunit:stage2']);
     grunt.registerTask('stage3', ['clean', 'copy:php', 'copy:manifest', 'favicons:stage3', 'nodeunit:stage3']);
+    grunt.registerTask('stage4', ['clean', 'favicons:stage4', 'favicons:stage4', 'nodeunit:stage4']);
 
     grunt.registerTask('test', ['jshint', 'stage1', 'stage2', 'stage3', "clean"]);
     grunt.registerTask('default', ['test']);
