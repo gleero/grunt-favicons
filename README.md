@@ -231,10 +231,14 @@ Website: [gleero.com](http://gleero.com/)
 
 E-mail: [gleero@gmail.com](mailto:gleero@gmail.com)
 
-Big thanks to: [ro-ka](https://github.com/ro-ka), [debugwand](https://github.com/debugwand) and [gausie](https://github.com/gausie) for contributing!
+Big thanks to: [ro-ka](https://github.com/ro-ka), [kfiku](https://github.com/kfiku), [debugwand](https://github.com/debugwand) and [gausie](https://github.com/gausie) for contributing!
 
 
 ## Release History
+
+### 2014-03-05 v0.6.1
+
+* Improved HTML tags clearing.
 
 ### 2013-12-19 v0.6.0
 
