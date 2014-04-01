@@ -63,6 +63,8 @@ module.exports = function(grunt) {
                     precomposed: true,
                     appleTouchBackgroundColor: "#a0b4bb",
                     coast: true,
+                    apple: false,
+                    regular: false,
                     windowsTile: true,
                     tileBlackWhite: false,
                     tileColor: 'auto'
@@ -107,9 +109,9 @@ module.exports = function(grunt) {
     grunt.registerTask('stage1', ['clean', 'copy', 'favicons:stage1', 'nodeunit:stage1']);
     grunt.registerTask('stage2', ['clean', 'copy', 'favicons:stage2', 'nodeunit:stage2']);
     grunt.registerTask('stage3', ['clean', 'copy:php', 'copy:manifest', 'favicons:stage3', 'nodeunit:stage3']);
-    grunt.registerTask('stage4', ['clean', 'favicons:stage4', 'favicons:stage4', 'nodeunit:stage4']);
+    grunt.registerTask('stage4', ['clean', 'favicons:stage4', 'nodeunit:stage4']);
 
-    grunt.registerTask('test', ['jshint', 'stage1', 'stage2', 'stage3', "clean"]);
+    grunt.registerTask('test', ['jshint', 'stage1', 'stage2', 'stage3', 'stage4', "clean"]);
     grunt.registerTask('default', ['test']);
 
 };

@@ -30,6 +30,8 @@ module.exports = function(grunt) {
             tileBlackWhite: true,
             tileColor: "auto", // none, auto, #color
             firefox: false,
+            apple: true,
+            regular: true,
             firefoxRound: false,
             firefoxManifest: ""
         });
@@ -103,8 +105,8 @@ module.exports = function(grunt) {
             $('link[rel="apple-touch-icon-precomposed"]').remove();
             $('meta').each(function(i, elem) {
                 var name = $(this).attr('name');
-                if(name && (name === 'msapplication-TileImage' || 
-                            name === 'msapplication-TileColor' || 
+                if(name && (name === 'msapplication-TileImage' ||
+                            name === 'msapplication-TileColor' ||
                             name.indexOf('msapplication-square') >= 0)) {
                     $(this).remove();
                 }
@@ -141,90 +143,96 @@ module.exports = function(grunt) {
                 var ext = path.extname(source);
                 var basename = path.basename(source, ext);
                 var dirname = path.dirname(source);
-                grunt.log.write('Resizing images for "' + source + '"... ');
-                ['16x16', '32x32', '48x48'].forEach(function(size) {
-                    var p = path.join(dirname, basename + "." + size + ext);
-                    var saveTo = path.join(f.dest, size + '.png');
-                    var src = source;
-                    if (fs.existsSync(p)) {
-                        src = p;
-                    }
-                    convert([src, '-resize', size, saveTo]);
-                    files.push(saveTo);
-                });
-                grunt.log.ok();
-
-                // favicon.ico
-                grunt.log.write('favicon.ico... ');
-                convert(files.concat([
-                    "-alpha on",
-                    "-background none",
-                    options.trueColor ? "" : "-bordercolor white -border 0 -colors 64",
-                    path.join(f.dest, 'favicon.ico')
-                ]));
-                grunt.log.ok();
-
-                // 64x64 favicon.png higher priority than .ico
-                grunt.log.write('favicon.png... ');
-                convert([source, '-resize', "64x64", path.join(f.dest, 'favicon.png')]);
-                grunt.log.ok();
-
-                ////// PNG's for iOS and Android icons
-
-                // Convert options for transparent and flatten
-                if (options.appleTouchBackgroundColor === "auto") {
-                    options.appleTouchBackgroundColor = generateColor(source);
-                }
-                var additionalOpts = options.appleTouchBackgroundColor !== "none" ?
-                    [ "-background", '"' + options.appleTouchBackgroundColor + '"', "-flatten",] : [];
-
                 var prefix = options.precomposed ? "-precomposed" : "";
+                var additionalOpts = options.appleTouchBackgroundColor !== "none" ?
+                    [ "-background", '"' + options.appleTouchBackgroundColor + '"', "-flatten"] : [];
+                grunt.log.write('Resizing images for "' + source + '"... ');
 
-                // 57x57: iPhone non-retina, Android 2.1+
-                grunt.log.write('apple-touch-icon.png... ');
-                convert(combine(source, f.dest, "57x57", "apple-touch-icon.png", additionalOpts, options.appleTouchPadding));
-                grunt.log.ok();
+                if (options.regular) {
 
-                if (options.precomposed) {
-                    grunt.log.write('apple-touch-icon' + prefix + '.png... ');
-                    convert(combine(source, f.dest, "57x57", "apple-touch-icon" + prefix + ".png", additionalOpts, options.appleTouchPadding));
+                    // regular png
+                    ['16x16', '32x32', '48x48'].forEach(function(size) {
+                        var p = path.join(dirname, basename + "." + size + ext);
+                        var saveTo = path.join(f.dest, size + '.png');
+                        var src = source;
+                        if (fs.existsSync(p)) {
+                            src = p;
+                        }
+                        convert([src, '-resize', size, saveTo]);
+                        files.push(saveTo);
+                    });
+                    grunt.log.ok();
+
+                    // favicon.ico
+                    grunt.log.write('favicon.ico... ');
+                    convert(files.concat([
+                        "-alpha on",
+                        "-background none",
+                        options.trueColor ? "" : "-bordercolor white -border 0 -colors 64",
+                        path.join(f.dest, 'favicon.ico')
+                    ]));
+                    grunt.log.ok();
+
+                    // 64x64 favicon.png higher priority than .ico
+                    grunt.log.write('favicon.png... ');
+                    convert([source, '-resize', "64x64", path.join(f.dest, 'favicon.png')]);
                     grunt.log.ok();
                 }
 
-                // 60x60: iPhone iOS 7 without size
-                grunt.log.write('apple-touch-icon-60x60-precomposed.png... ');
-                convert(combine(source, f.dest, "60x60", "apple-touch-icon-60x60-precomposed.png", additionalOpts, options.appleTouchPadding));
-                grunt.log.ok();
+                ////// PNG's for iOS and Android icons
 
-                // 72x72: iPad non-retina, iOS 6 and lower
-                grunt.log.write('apple-touch-icon-72x72' + prefix + '.png... ');
-                convert(combine(source, f.dest, "72x72", "apple-touch-icon-72x72" + prefix + ".png", additionalOpts, options.appleTouchPadding));
-                grunt.log.ok();
+                if (options.apple) {
+                    // Convert options for transparent and flatten
+                    if (options.appleTouchBackgroundColor === "auto") {
+                        options.appleTouchBackgroundColor = generateColor(source);
+                    }
 
-                // 76x76: iPad non-retina, iOS 7 and higher
-                grunt.log.write('apple-touch-icon-76x76-precomposed.png... ');
-                convert(combine(source, f.dest, "76x76", "apple-touch-icon-76x76-precomposed.png", additionalOpts, options.appleTouchPadding));
-                grunt.log.ok();
+                    // 57x57: iPhone non-retina, Android 2.1+
+                    grunt.log.write('apple-touch-icon.png... ');
+                    convert(combine(source, f.dest, "57x57", "apple-touch-icon.png", additionalOpts, options.appleTouchPadding));
+                    grunt.log.ok();
 
-                // 114x114: iPhone retina, iOS 6 and lower
-                grunt.log.write('apple-touch-icon-114x114' + prefix + '.png... ');
-                convert(combine(source, f.dest, "114x114", "apple-touch-icon-114x114" + prefix + ".png", additionalOpts, options.appleTouchPadding));
-                grunt.log.ok();
+                    if (options.precomposed) {
+                        grunt.log.write('apple-touch-icon' + prefix + '.png... ');
+                        convert(combine(source, f.dest, "57x57", "apple-touch-icon" + prefix + ".png", additionalOpts, options.appleTouchPadding));
+                        grunt.log.ok();
+                    }
 
-                // 120x120: iPhone retina, iOS 7 and higher
-                grunt.log.write('apple-touch-icon-120x120-precomposed.png... ');
-                convert(combine(source, f.dest, "120x120", "apple-touch-icon-120x120-precomposed.png", additionalOpts, options.appleTouchPadding));
-                grunt.log.ok();
+                    // 60x60: iPhone iOS 7 without size
+                    grunt.log.write('apple-touch-icon-60x60-precomposed.png... ');
+                    convert(combine(source, f.dest, "60x60", "apple-touch-icon-60x60-precomposed.png", additionalOpts, options.appleTouchPadding));
+                    grunt.log.ok();
 
-                // 144x144: iPad retina, iOS 6 and lower
-                grunt.log.write('apple-touch-icon-144x144' + prefix + '.png... ');
-                convert(combine(source, f.dest, "144x144", "apple-touch-icon-144x144" + prefix + ".png", additionalOpts, options.appleTouchPadding));
-                grunt.log.ok();
+                    // 72x72: iPad non-retina, iOS 6 and lower
+                    grunt.log.write('apple-touch-icon-72x72' + prefix + '.png... ');
+                    convert(combine(source, f.dest, "72x72", "apple-touch-icon-72x72" + prefix + ".png", additionalOpts, options.appleTouchPadding));
+                    grunt.log.ok();
 
-                // 152x152: iPad retina, iOS 7 and higher
-                grunt.log.write('apple-touch-icon-152x152-precomposed.png... ');
-                convert(combine(source, f.dest, "152x152", "apple-touch-icon-152x152-precomposed.png", additionalOpts, options.appleTouchPadding));
-                grunt.log.ok();
+                    // 76x76: iPad non-retina, iOS 7 and higher
+                    grunt.log.write('apple-touch-icon-76x76-precomposed.png... ');
+                    convert(combine(source, f.dest, "76x76", "apple-touch-icon-76x76-precomposed.png", additionalOpts, options.appleTouchPadding));
+                    grunt.log.ok();
+
+                    // 114x114: iPhone retina, iOS 6 and lower
+                    grunt.log.write('apple-touch-icon-114x114' + prefix + '.png... ');
+                    convert(combine(source, f.dest, "114x114", "apple-touch-icon-114x114" + prefix + ".png", additionalOpts, options.appleTouchPadding));
+                    grunt.log.ok();
+
+                    // 120x120: iPhone retina, iOS 7 and higher
+                    grunt.log.write('apple-touch-icon-120x120-precomposed.png... ');
+                    convert(combine(source, f.dest, "120x120", "apple-touch-icon-120x120-precomposed.png", additionalOpts, options.appleTouchPadding));
+                    grunt.log.ok();
+
+                    // 144x144: iPad retina, iOS 6 and lower
+                    grunt.log.write('apple-touch-icon-144x144' + prefix + '.png... ');
+                    convert(combine(source, f.dest, "144x144", "apple-touch-icon-144x144" + prefix + ".png", additionalOpts, options.appleTouchPadding));
+                    grunt.log.ok();
+
+                    // 152x152: iPad retina, iOS 7 and higher
+                    grunt.log.write('apple-touch-icon-152x152-precomposed.png... ');
+                    convert(combine(source, f.dest, "152x152", "apple-touch-icon-152x152-precomposed.png", additionalOpts, options.appleTouchPadding));
+                    grunt.log.ok();
+                }
 
                 // 228x228: Coast
                 if (options.coast) {
@@ -335,17 +343,19 @@ module.exports = function(grunt) {
                     }
 
                     // iOS
-                    elements += "\t<link rel=\"apple-touch-icon-precomposed\" sizes=\"152x152\" href=\"" + options.HTMLPrefix + "apple-touch-icon-152x152-precomposed.png\">\n";
-                    elements += "\t<link rel=\"apple-touch-icon-precomposed\" sizes=\"120x120\" href=\"" + options.HTMLPrefix + "apple-touch-icon-120x120-precomposed.png\">\n";
+                    if (options.apple) {
+                        elements += "\t<link rel=\"apple-touch-icon-precomposed\" sizes=\"152x152\" href=\"" + options.HTMLPrefix + "apple-touch-icon-152x152-precomposed.png\">\n";
+                        elements += "\t<link rel=\"apple-touch-icon-precomposed\" sizes=\"120x120\" href=\"" + options.HTMLPrefix + "apple-touch-icon-120x120-precomposed.png\">\n";
 
-                    elements += "\t<link rel=\"apple-touch-icon-precomposed\" sizes=\"76x76\" href=\"" + options.HTMLPrefix + "apple-touch-icon-76x76-precomposed.png\">\n";
-                    elements += "\t<link rel=\"apple-touch-icon-precomposed\" sizes=\"60x60\" href=\"" + options.HTMLPrefix + "apple-touch-icon-60x60-precomposed.png\">\n";
+                        elements += "\t<link rel=\"apple-touch-icon-precomposed\" sizes=\"76x76\" href=\"" + options.HTMLPrefix + "apple-touch-icon-76x76-precomposed.png\">\n";
+                        elements += "\t<link rel=\"apple-touch-icon-precomposed\" sizes=\"60x60\" href=\"" + options.HTMLPrefix + "apple-touch-icon-60x60-precomposed.png\">\n";
 
-                    elements += "\t<link rel=\"apple-touch-icon" + prefix + "\" sizes=\"144x144\" href=\"" + options.HTMLPrefix + "apple-touch-icon-144x144" + prefix + ".png\">\n";
-                    elements += "\t<link rel=\"apple-touch-icon" + prefix + "\" sizes=\"114x114\" href=\"" + options.HTMLPrefix + "apple-touch-icon-114x114" + prefix + ".png\">\n";
+                        elements += "\t<link rel=\"apple-touch-icon" + prefix + "\" sizes=\"144x144\" href=\"" + options.HTMLPrefix + "apple-touch-icon-144x144" + prefix + ".png\">\n";
+                        elements += "\t<link rel=\"apple-touch-icon" + prefix + "\" sizes=\"114x114\" href=\"" + options.HTMLPrefix + "apple-touch-icon-114x114" + prefix + ".png\">\n";
 
-                    elements += "\t<link rel=\"apple-touch-icon" + prefix + "\" sizes=\"72x72\" href=\"" + options.HTMLPrefix + "apple-touch-icon-72x72" + prefix + ".png\">\n";
-                    elements += "\t<link rel=\"apple-touch-icon\" sizes=\"57x57\" href=\"" + options.HTMLPrefix + "apple-touch-icon.png\">\n";
+                        elements += "\t<link rel=\"apple-touch-icon" + prefix + "\" sizes=\"72x72\" href=\"" + options.HTMLPrefix + "apple-touch-icon-72x72" + prefix + ".png\">\n";
+                        elements += "\t<link rel=\"apple-touch-icon\" sizes=\"57x57\" href=\"" + options.HTMLPrefix + "apple-touch-icon.png\">\n";
+                    }
 
                     // Coast browser
                     if (options.coast) {
@@ -353,8 +363,10 @@ module.exports = function(grunt) {
                     }
 
                     // Default
-                    elements += "\t<link rel=\"shortcut icon\" href=\"" + options.HTMLPrefix + "favicon.ico\" />\n";
-                    elements += "\t<link rel=\"icon\" type=\"image/png\" sizes=\"64x64\" href=\"" + options.HTMLPrefix + "favicon.png\" />\n";
+                    if (options.regular) {
+                        elements += "\t<link rel=\"shortcut icon\" href=\"" + options.HTMLPrefix + "favicon.ico\" />\n";
+                        elements += "\t<link rel=\"icon\" type=\"image/png\" sizes=\"64x64\" href=\"" + options.HTMLPrefix + "favicon.png\" />\n";
+                    }
 
                     // Windows 8 tile. In HTML version background color will be as meta-tag
 
@@ -378,9 +390,11 @@ module.exports = function(grunt) {
                 }
 
                 // Cleanup
-                ['16x16', '32x32', '48x48'].forEach(function(size) {
-                    fs.unlink(path.join(f.dest, size + '.png'));
-                });
+                if (options.regular) {
+                    ['16x16', '32x32', '48x48'].forEach(function(size) {
+                        fs.unlink(path.join(f.dest, size + '.png'));
+                    });
+                }
 
             });
 

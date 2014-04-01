@@ -99,6 +99,18 @@ Default value: `''`
 
 The path to the folder that contains the icons.
 
+#### options.apple
+Type: `Boolean`
+Default value: `true`
+
+Generate apple icons.
+
+#### options.regular
+Type: `Boolean`
+Default value: `true`
+
+Generate regular icons.
+
 #### options.trueColor
 Type: `Boolean`
 Default value: `false`
@@ -139,7 +151,6 @@ Type: `Boolean`
 Default value: `false`
 
 Add 228x228 icon for [Coast browser](http://coastbyopera.com/).
-
 
 #### options.tileBlackWhite
 Type: `Boolean`
@@ -235,6 +246,10 @@ Big thanks to: [ro-ka](https://github.com/ro-ka), [kfiku](https://github.com/kfi
 
 
 ## Release History
+
+### 2014-04-01 v0.6.2
+
+* [#24](https://github.com/gleero/grunt-favicons/issues/24) Apple and regular favicons are now optional.
 
 ### 2014-03-05 v0.6.1
 
