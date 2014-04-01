@@ -27,6 +27,7 @@ module.exports = function(grunt) {
             appleTouchPadding: 15,
             windowsTile: true,
             coast: false,
+            sharp: 0,
             tileBlackWhite: true,
             tileColor: "auto", // none, auto, #color
             firefox: false,
@@ -73,6 +74,12 @@ module.exports = function(grunt) {
                 "-resize",
                 size
             ].concat(additionalOpts);
+            if (options.sharp > 0) {
+                out = out.concat([
+                    "-adaptive-sharpen",
+                    options.sharp + "x" + options.sharp
+                ]);
+            }
             // icon padding
             if (typeof(padding)==='number' && padding >= 0 && padding < 100) {
                 var thumb = Math.round((100 - padding) * parseInt(size.split("x")[0], 10) / 100);

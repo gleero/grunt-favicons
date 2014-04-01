@@ -117,6 +117,12 @@ Default value: `false`
 
 Use true color favicon.ico or 256 сolor. True color are larger.
 
+#### options.sharp
+Type: `Float`
+Default value: `0`
+
+Adaptively sharpen pixels. Increase effect near edges. 0 — disable.
+
 #### options.precomposed
 Type: `Boolean`
 Default value: `true`
@@ -246,6 +252,10 @@ Big thanks to: [ro-ka](https://github.com/ro-ka), [kfiku](https://github.com/kfi
 
 
 ## Release History
+
+### 2014-04-01 v0.6.3
+
+* [#21](https://github.com/gleero/grunt-favicons/issues/21) Add `sharp` option for sharping icons.
 
 ### 2014-04-01 v0.6.2
 

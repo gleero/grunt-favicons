@@ -35,6 +35,7 @@ module.exports = function(grunt) {
                     appleTouchBackgroundColor: "#a0b4bb",
                     appleTouchPadding: 25,
                     firefox: true,
+                    sharp: 1,
                     debug: true,
                     firefoxManifest: 'test/out/manifest.webapp'
                 },
@@ -111,7 +112,7 @@ module.exports = function(grunt) {
     grunt.registerTask('stage3', ['clean', 'copy:php', 'copy:manifest', 'favicons:stage3', 'nodeunit:stage3']);
     grunt.registerTask('stage4', ['clean', 'favicons:stage4', 'nodeunit:stage4']);
 
-    grunt.registerTask('test', ['jshint', 'stage1', 'stage2', 'stage3', 'stage4', "clean"]);
+    grunt.registerTask('test', ['jshint', 'stage1', 'stage2', 'stage3', 'stage4', 'clean']);
     grunt.registerTask('default', ['test']);
 
 };
