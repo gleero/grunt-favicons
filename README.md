@@ -29,7 +29,8 @@ Generates all known types and sizes icons from PNG image. Uses ImageMagick.
 - `firefox-icon-90x90.png` (90x90) - Firefox OS;
 - `firefox-icon-120x120.png` (120x120) - Firefox OS;
 - `firefox-icon-128x128.png` (128x128) - Firefox on Android / Windows;
-- `firefox-icon-256x256.png` (256x256) - Firefox on Android / Windows.
+- `firefox-icon-256x256.png` (256x256) - Firefox on Android / Windows;
+- `homescreen-196x196.png` (196x196) - Android Homescreen.
 
 Adds changes to `html` file.
 
@@ -192,6 +193,12 @@ Default value: `false`
 Make Firefox OS icons rounded.
 
 ![options.firefoxRound](http://gleero.com/pictures/firefoxRound.png)
+
+#### options.androidHomescreen
+Type: `Boolean`
+Default value: `false`
+
+Make [Android Homescreen](https://developer.chrome.com/multidevice/android/installtohomescreen) app icon.
 
 ### Low resolution
 

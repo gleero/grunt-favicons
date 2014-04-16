@@ -297,6 +297,23 @@ exports.favicons = {
         test.done();
     },
 
+    // homescreen-196x196.png exists
+    ah196Exists: function(test) {
+        test.expect(1);
+        var exists = fs.existsSync(path + "/homescreen-196x196.png");
+        test.ok(exists, 'homescreen-196x196.png does not exist.');
+        test.done();
+    },
+
+    // homescreen-196x196.png dimensions
+    ah196Dim: function(test) {
+        test.expect(1);
+        var dimensions = sizeOf(path + "/homescreen-196x196.png");
+        var pass = dimensions.width === 196 && dimensions.height === 196;
+        test.ok(pass, 'homescreen-196x196.png is not 196x196.');
+        test.done();
+    },
+
     // firefox manifest test hashsum
     manifestsum: function(test) {
         test.expect(1);
@@ -309,7 +326,7 @@ exports.favicons = {
     htmlsum: function(test) {
         test.expect(1);
         var original = crypto.createHash('sha1').update(grunt.file.read(path + '/test.html')).digest('hex');
-        test.ok(original === '9161323973abf3c36460570135ca6e2b8ae2d901', 'html hashsum not valid');
+        test.ok(original === 'ba907d7c29db7307b8c9045fc7c8f532efa53788', 'html hashsum not valid');
         test.done();
     }
 
