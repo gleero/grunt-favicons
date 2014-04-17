@@ -34,7 +34,8 @@ module.exports = function(grunt) {
             apple: true,
             regular: true,
             firefoxRound: false,
-            firefoxManifest: ""
+            firefoxManifest: "",
+            androidHomescreen: false
         });
 
         // Execute external command
@@ -248,6 +249,13 @@ module.exports = function(grunt) {
                     grunt.log.ok();
                 }
 
+                // Android Homescreen app
+                if (options.androidHomescreen) {
+                    grunt.log.write('homescreen-196x196.png... ');
+                    convert(combine(source, f.dest, "196x196", "homescreen-196x196.png", additionalOpts));
+                    grunt.log.ok();
+                }
+
                 // Firefox
                 if (options.firefox) {
                     var updateFirefoxManifest = (options.firefoxManifest !== undefined && options.firefoxManifest !== ''),
@@ -367,6 +375,12 @@ module.exports = function(grunt) {
                     // Coast browser
                     if (options.coast) {
                       elements += "\t<link rel=\"icon\" sizes=\"228x228\" href=\"" + options.HTMLPrefix + "coast-icon-228x228.png\" />\n";
+                    }
+
+                    // Android Homescreen app
+                    if (options.androidHomescreen) {
+                      elements += "\t<meta name=\"mobile-web-app-capable\" value=\"yes\" />\n";
+                      elements += "\t<link rel=\"icon\" sizes=\"196x196\" href=\"" + options.HTMLPrefix + "homescreen-196x196.png\" />\n";
                     }
 
                     // Default

@@ -37,7 +37,8 @@ module.exports = function(grunt) {
                     firefox: true,
                     sharp: 1,
                     debug: true,
-                    firefoxManifest: 'test/out/manifest.webapp'
+                    firefoxManifest: 'test/out/manifest.webapp',
+                    androidHomescreen: true
                 },
                 src: 'test/test.png',
                 dest: 'test/out'
