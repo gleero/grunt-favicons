@@ -255,10 +255,21 @@ Website: [gleero.com](http://gleero.com/)
 
 E-mail: [gleero@gmail.com](mailto:gleero@gmail.com)
 
-Big thanks to: [ro-ka](https://github.com/ro-ka), [kfiku](https://github.com/kfiku), [debugwand](https://github.com/debugwand) and [gausie](https://github.com/gausie) for contributing!
+
+Big thanks for contributing:
+
+- [ro-ka](https://github.com/ro-ka)
+- [kfiku](https://github.com/kfiku)
+- [debugwand](https://github.com/debugwand)
+- [gausie](https://github.com/gausie)
+- [alaz](https://github.com/alaz)
 
 
 ## Release History
+
+### 2014-04-18 v0.6.4
+
+* [#28](https://github.com/gleero/grunt-favicons/issues/28) Add Android Homescreen app icon.
 
 ### 2014-04-01 v0.6.3
 
