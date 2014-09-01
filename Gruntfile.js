@@ -73,6 +73,25 @@ module.exports = function(grunt) {
                 },
                 src: 'test/img.jpg',
                 dest: 'test/out'
+            },
+            stage5: {
+              options: {
+                html: 'test/out/test.html.indent',
+                trueColor: true,
+                HTMLPrefix: "/images/icons/",
+                windowsTile: false,
+                precomposed: false,
+                appleTouchBackgroundColor: "#a0b4bb",
+                appleTouchPadding: 25,
+                firefox: true,
+                sharp: 1,
+                debug: true,
+                firefoxManifest: 'test/out/manifest.webapp',
+                androidHomescreen: true,
+                indent: '  '
+              },
+              src: 'test/test.png',
+              dest: 'test/out'
             }
         },
 
@@ -88,6 +107,10 @@ module.exports = function(grunt) {
             manifest: {
                 src: 'test/manifest.webapp',
                 dest: 'test/out/manifest.webapp'
+            },
+            indent: {
+                src: 'test/index.html',
+                dest: 'test/out/test.html.indent'
             }
         },
 
@@ -95,7 +118,8 @@ module.exports = function(grunt) {
             stage1: ['test/test_stage1.js'],
             stage2: ['test/test_stage2.js'],
             stage3: ['test/test_stage3.js'],
-            stage4: ['test/test_stage4.js']
+            stage4: ['test/test_stage4.js'],
+            stage5: ['test/test_stage5.js']
         },
 
         clean: ['test/out']
@@ -112,8 +136,9 @@ module.exports = function(grunt) {
     grunt.registerTask('stage2', ['clean', 'copy', 'favicons:stage2', 'nodeunit:stage2']);
     grunt.registerTask('stage3', ['clean', 'copy:php', 'copy:manifest', 'favicons:stage3', 'nodeunit:stage3']);
     grunt.registerTask('stage4', ['clean', 'favicons:stage4', 'nodeunit:stage4']);
+    grunt.registerTask('stage5', ['clean', 'copy', 'favicons:stage5', 'nodeunit:stage5']);
 
-    grunt.registerTask('test', ['jshint', 'stage1', 'stage2', 'stage3', 'stage4', 'clean']);
+    grunt.registerTask('test', ['jshint', 'stage1', 'stage2', 'stage3', 'stage4', 'stage5', 'clean']);
     grunt.registerTask('default', ['test']);
 
 };

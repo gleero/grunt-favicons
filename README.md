@@ -200,6 +200,12 @@ Default value: `false`
 
 Make [Android Homescreen](https://developer.chrome.com/multidevice/android/installtohomescreen) app icon.
 
+#### options.indent
+Type: `String`
+Default value: `\t`
+
+String value for the indentation to be used for each link in the resulting HTML. Defaults to a tab character.
+
 ### Low resolution
 
 If you reduce the image to 16x16, it will blured. To avoid this, you can put near source image the prefixes. For example: source image called `logo.png`. If you put nearly `logo.16x16.png` then it will be used.
