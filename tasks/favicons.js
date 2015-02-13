@@ -8,7 +8,7 @@
 
 var path = require('path');
 var fs = require('fs');
-var execSync = require("execSync");
+var exec = require("sync-exec");
 
 module.exports = function(grunt) {
 
@@ -43,7 +43,7 @@ module.exports = function(grunt) {
             if (options.debug) {
                 console.log("\n\033[37m" + cmd + "\033[0m");
             }
-            return execSync.exec(cmd);
+            return exec(cmd);
         };
 
         // Convert image with imagemagick
