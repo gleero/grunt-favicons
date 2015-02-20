@@ -204,6 +204,17 @@ Make [Android Homescreen](https://developer.chrome.com/multidevice/android/insta
 
 If you reduce the image to 16x16, it will blured. To avoid this, you can put near source image the prefixes. For example: source image called `logo.png`. If you put nearly `logo.16x16.png` then it will be used.
 
+#### options.getLowResolutionImagePath
+Type: `Function`
+Default value:
+```js
+getLowResolutionImagePath: function (srcFilePath, size) {
+    var extname = path.extname(srcFilePath);
+    return path.join(path.dirname(srcFilePath), path.basename(srcFilePath, extname) + '.' + size + extname);
+}
+```
+Change low resolution image path (default template of naming).
+
 ### Usage Examples
 
 #### Default Options

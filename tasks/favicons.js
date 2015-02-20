@@ -35,7 +35,11 @@ module.exports = function(grunt) {
             regular: true,
             firefoxRound: false,
             firefoxManifest: "",
-            androidHomescreen: false
+            androidHomescreen: false,
+            getLowResolutionImagePath: function (srcFilePath, size) {
+                var extname = path.extname(srcFilePath);
+                return path.join(path.dirname(srcFilePath), path.basename(srcFilePath, extname) + '.' + size + extname);
+            }
         });
 
         // Execute external command
@@ -148,9 +152,6 @@ module.exports = function(grunt) {
                 // 48x48: windows desktop
 
                 var files = [];
-                var ext = path.extname(source);
-                var basename = path.basename(source, ext);
-                var dirname = path.dirname(source);
                 var prefix = options.precomposed ? "-precomposed" : "";
                 var additionalOpts = options.appleTouchBackgroundColor !== "none" ?
                     [ "-background", '"' + options.appleTouchBackgroundColor + '"', "-flatten"] : [];
@@ -160,11 +161,11 @@ module.exports = function(grunt) {
 
                     // regular png
                     ['16x16', '32x32', '48x48'].forEach(function(size) {
-                        var p = path.join(dirname, basename + "." + size + ext);
+                        var lowResolutionImagePath = options.getLowResolutionImagePath(source, size);
                         var saveTo = path.join(f.dest, size + '.png');
                         var src = source;
-                        if (fs.existsSync(p)) {
-                            src = p;
+                        if (fs.existsSync(lowResolutionImagePath)) {
+                            src = lowResolutionImagePath;
                         }
                         convert([src, '-resize', size, saveTo]);
                         files.push(saveTo);
