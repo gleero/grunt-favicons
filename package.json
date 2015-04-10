@@ -29,7 +29,8 @@
     "test": "grunt test"
   },
   "dependencies": {
-    "cheerio": "~0.12.1"
+    "cheerio": "~0.12.1",
+    "sync-exec": "^0.4.0"
   },
   "devDependencies": {
     "grunt-contrib-jshint": "~0.6.3",
@@ -38,8 +39,7 @@
     "grunt": "~0.4.1",
     "grunt-contrib-copy": "~0.4.1",
     "image-size": "~0.1.5",
-    "crypto": "0.0.3",
-    "sync-exec": "^0.4.0"
+    "crypto": "0.0.3"
   },
   "peerDependencies": {
     "grunt": "~0.4.1"
