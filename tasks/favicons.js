@@ -153,6 +153,12 @@ module.exports = function(grunt) {
 
                 var files = [];
                 var prefix = options.precomposed ? "-precomposed" : "";
+
+                // Convert options for transparent and flatten
+                if (options.appleTouchBackgroundColor === "auto") {
+                    options.appleTouchBackgroundColor = generateColor(source);
+                }
+
                 var additionalOpts = options.appleTouchBackgroundColor !== "none" ?
                     [ "-background", '"' + options.appleTouchBackgroundColor + '"', "-flatten"] : [];
                 grunt.log.write('Resizing images for "' + source + '"... ');
@@ -191,11 +197,6 @@ module.exports = function(grunt) {
                 ////// PNG's for iOS and Android icons
 
                 if (options.apple) {
-                    // Convert options for transparent and flatten
-                    if (options.appleTouchBackgroundColor === "auto") {
-                        options.appleTouchBackgroundColor = generateColor(source);
-                    }
-
                     // 57x57: iPhone non-retina, Android 2.1+
                     grunt.log.write('apple-touch-icon.png... ');
                     convert(combine(source, f.dest, "57x57", "apple-touch-icon.png", additionalOpts, options.appleTouchPadding));
