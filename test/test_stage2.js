@@ -297,20 +297,20 @@ exports.favicons = {
         test.done();
     },
 
-    // homescreen-196x196.png exists
-    ah196Exists: function(test) {
+    // homescreen-192x192.png exists
+    ah192Exists: function(test) {
         test.expect(1);
-        var exists = fs.existsSync(path + "/homescreen-196x196.png");
-        test.ok(exists, 'homescreen-196x196.png does not exist.');
+        var exists = fs.existsSync(path + "/homescreen-192x192.png");
+        test.ok(exists, 'homescreen-192x192.png does not exist.');
         test.done();
     },
 
-    // homescreen-196x196.png dimensions
+    // homescreen-192x192.png dimensions
     ah196Dim: function(test) {
         test.expect(1);
-        var dimensions = sizeOf(path + "/homescreen-196x196.png");
-        var pass = dimensions.width === 196 && dimensions.height === 196;
-        test.ok(pass, 'homescreen-196x196.png is not 196x196.');
+        var dimensions = sizeOf(path + "/homescreen-192x192.png");
+        var pass = dimensions.width === 192 && dimensions.height === 192;
+        test.ok(pass, 'homescreen-192x192.png is not 192x192.');
         test.done();
     },
 
@@ -326,7 +326,7 @@ exports.favicons = {
     htmlsum: function(test) {
         test.expect(1);
         var original = crypto.createHash('sha1').update(grunt.file.read(path + '/test.html')).digest('hex');
-        test.ok(original === 'ba907d7c29db7307b8c9045fc7c8f532efa53788', 'html hashsum not valid');
+        test.ok(original === '3de4a21225e96816a33312eb1172331257ac2837', 'html hashsum not valid');
         test.done();
     }
 
