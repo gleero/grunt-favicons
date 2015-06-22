@@ -254,8 +254,8 @@ module.exports = function(grunt) {
 
                 // Android Homescreen app
                 if (options.androidHomescreen) {
-                    grunt.log.write('homescreen-196x196.png... ');
-                    convert(combine(source, f.dest, "196x196", "homescreen-196x196.png", additionalOpts));
+                    grunt.log.write('homescreen-192x192.png... ');
+                    convert(combine(source, f.dest, "192x192", "homescreen-192x192.png", additionalOpts));
                     grunt.log.ok();
                 }
 
@@ -383,7 +383,7 @@ module.exports = function(grunt) {
                     // Android Homescreen app
                     if (options.androidHomescreen) {
                       elements += options.indent + "<meta name=\"mobile-web-app-capable\" value=\"yes\" />\n";
-                      elements += options.indent + "<link rel=\"icon\" sizes=\"196x196\" href=\"" + options.HTMLPrefix + "homescreen-196x196.png\" />\n";
+                      elements += options.indent + "<link rel=\"icon\" sizes=\"192x192\" href=\"" + options.HTMLPrefix + "homescreen-192x192.png\" />\n";
                     }
 
                     // Default
