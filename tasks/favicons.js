@@ -350,7 +350,7 @@ module.exports = function(grunt) {
                 if (needHTML) {
                     grunt.log.write('Updating HTML... ');
 
-                    var timestamp = '?' + new Date().getTime().toString();
+                    var timestamp = '?ts=' + new Date().getTime().toString();
 
                     var elements = "";
 
