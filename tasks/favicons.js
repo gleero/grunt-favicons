@@ -110,10 +110,12 @@ module.exports = function(grunt) {
         var needHTML = options.html !== undefined && options.html !== "";
 
         if (needHTML) {
-            if (!truncateHTML) {
-                var cheerio = require("cheerio");
-                var contents = (grunt.file.exists(options.html)) ? grunt.file.read(options.html) : "";
-                var $ = cheerio.load(contents);
+            var html = '';
+            var cheerio = require("cheerio");
+            var contents = (grunt.file.exists(options.html)) ? grunt.file.read(options.html) : "";
+            var $;
+            if (contents !== "" && !options.truncateHTML) {
+                $ = cheerio.load(contents);
                 // Removing exists favicon from HTML
                 $('link[rel="shortcut icon"]').remove();
                 $('link[rel="icon"]').remove();
@@ -127,9 +129,9 @@ module.exports = function(grunt) {
                         $(this).remove();
                     }
                 });
-                var html = $.html().replace(/(?:(?:^|\n)\s+|\s+(?:$|\n))/g,'').replace(/\s+/g,' ');
+                 html = $.html().replace(/(?:(?:^|\n)\s+|\s+(?:$|\n))/g,'').replace(/\s+/g,' ');
             }
-            if(html === '' || truncateHTML) {
+            if(html === '') {
                 $ = cheerio.load('');
             }
         }
