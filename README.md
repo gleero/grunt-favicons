@@ -94,6 +94,12 @@ Default value: `''`
 
 Path to HTML you want to add links to icons.
 
+#### options.truncateHTML
+Type: `Boolean`
+Default value: `false`
+
+Truncate the HTML file before adding links.
+
 #### options.HTMLPrefix
 Type: `String`
 Default value: `''`

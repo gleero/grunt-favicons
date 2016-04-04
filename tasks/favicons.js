@@ -39,6 +39,7 @@ module.exports = function(grunt) {
             androidIcons : false,
             indent: "\t",
             timestamp: false,
+            truncateHTML: false,
             getLowResolutionImagePath: function (srcFilePath, size) {
                 var extname = path.extname(srcFilePath);
                 return path.join(path.dirname(srcFilePath), path.basename(srcFilePath, extname) + '.' + size + extname);
@@ -110,23 +111,27 @@ module.exports = function(grunt) {
         var needHTML = options.html !== undefined && options.html !== "";
 
         if (needHTML) {
+            var html = '';
             var cheerio = require("cheerio");
             var contents = (grunt.file.exists(options.html)) ? grunt.file.read(options.html) : "";
-            var $ = cheerio.load(contents);
-            // Removing exists favicon from HTML
-            $('link[rel="shortcut icon"]').remove();
-            $('link[rel="icon"]').remove();
-            $('link[rel="apple-touch-icon"]').remove();
-            $('link[rel="apple-touch-icon-precomposed"]').remove();
-            $('meta').each(function(i, elem) {
-                var name = $(this).attr('name');
-                if(name && (name === 'msapplication-TileImage' ||
-                            name === 'msapplication-TileColor' ||
-                            name.indexOf('msapplication-square') >= 0)) {
-                    $(this).remove();
-                }
-            });
-            var html = $.html().replace(/(?:(?:^|\n)\s+|\s+(?:$|\n))/g,'').replace(/\s+/g,' ');
+            var $;
+            if (contents !== "" && !options.truncateHTML) {
+                $ = cheerio.load(contents);
+                // Removing exists favicon from HTML
+                $('link[rel="shortcut icon"]').remove();
+                $('link[rel="icon"]').remove();
+                $('link[rel="apple-touch-icon"]').remove();
+                $('link[rel="apple-touch-icon-precomposed"]').remove();
+                $('meta').each(function(i, elem) {
+                    var name = $(this).attr('name');
+                    if(name && (name === 'msapplication-TileImage' ||
+                                name === 'msapplication-TileColor' ||
+                                name.indexOf('msapplication-square') >= 0)) {
+                        $(this).remove();
+                    }
+                });
+                 html = $.html().replace(/(?:(?:^|\n)\s+|\s+(?:$|\n))/g,'').replace(/\s+/g,' ');
+            }
             if(html === '') {
                 $ = cheerio.load('');
             }
