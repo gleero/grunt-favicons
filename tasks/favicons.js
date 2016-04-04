@@ -36,6 +36,7 @@ module.exports = function(grunt) {
             firefoxRound: false,
             firefoxManifest: "",
             androidHomescreen: false,
+            androidIcons : false,
             indent: "\t",
             timestamp: false,
             getLowResolutionImagePath: function (srcFilePath, size) {
@@ -257,6 +258,29 @@ module.exports = function(grunt) {
                 if (options.androidHomescreen) {
                     grunt.log.write('homescreen-192x192.png... ');
                     convert(combine(source, f.dest, "192x192", "homescreen-192x192.png", additionalOpts));
+                    grunt.log.ok();
+                }
+                
+                // Android Icons app
+                if (options.androidIcons) {
+                    // 36x36: LDPI
+                    grunt.log.write('android-icons-36x36.png... ');
+                    convert(combine(source, f.dest, "36x36", "android-icons-36x36.png", additionalOpts));
+                    grunt.log.ok();
+
+                    // 48x48: MDPI
+                    grunt.log.write('android-icons-48x48.png... ');
+                    convert(combine(source, f.dest, "48x48", "android-icons-48x48.png", additionalOpts));
+                    grunt.log.ok();
+
+                    // 72x72: HDPI
+                    grunt.log.write('android-icons-72x72.png... ');
+                    convert(combine(source, f.dest, "72x72", "android-icons-72x72.png", additionalOpts));
+                    grunt.log.ok();
+
+                    // 96x96: XHDPI
+                    grunt.log.write('android-icons-96x96.png... ');
+                    convert(combine(source, f.dest, "96x96", "android-icons-96x96.png", additionalOpts));
                     grunt.log.ok();
                 }
 
